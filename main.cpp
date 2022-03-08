@@ -7,14 +7,13 @@
 
 auto main(int argc, char *argv[]) -> int
 {
-    Lab l;
-    int sum = l.sum(1, 2);
-    std::cout << sum << std::endl;
+    int sum = Lab::sum(1, 2);
+    qDebug() << sum;
 
-    QApplication a(argc, argv);
+    auto a = QApplication(argc, argv);
     auto w = MainWindow();
     w.resize(800, 600);
     w.show();
-    return a.exec();
+    return QApplication::exec();
 }
 

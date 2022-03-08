@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include <QMenuBar>
+#include <QMouseEvent>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -27,13 +28,22 @@ auto MainWindow::createToolBars() -> void
 void MainWindow::mouseMoveEvent(QMouseEvent *event)
 {
     QWidget::mouseMoveEvent(event);
+    qDebug() << "<< MouseMoveEvent >> " << event->pos();
 }
 void MainWindow::mousePressEvent(QMouseEvent *event)
 {
-
+    qDebug() << "<< MousePressEvent >> " << event->pos();
 }
 void MainWindow::closeEvent(QCloseEvent *event)
 {
-    std::cout << "<< CloseEvent >>: " << event->type() << std::endl;
+    qDebug() << "<< CloseEvent >> " << event->type();
     event->accept();
+}
+void MainWindow::contextMenuEvent(QContextMenuEvent *event)
+{
+    qDebug() << "<< ContextMenu Event >>";
+    auto *menu = new QMenu(this);
+    menu->addAction(tr("Action 1"));
+    menu->addAction(tr("Action 2"));
+    menu->popup(mapToGlobal(event->pos()));
 }

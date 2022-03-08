@@ -5,6 +5,8 @@
 #include <iostream>
 #include <QCloseEvent>
 
+// https://www.jetbrains.com/help/clion/overriding-methods-of-a-superclass.html
+
 class MainWindow: public QMainWindow
 {
 Q_OBJECT
@@ -18,7 +20,8 @@ public:
 private:
     QAction *newAct;
     QAction *quitAct;
-
+protected:
+    void contextMenuEvent(QContextMenuEvent *event) override;
 protected:
     void mouseMoveEvent(QMouseEvent *event) override;
     void mousePressEvent(QMouseEvent *event) override;
