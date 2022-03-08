@@ -6,6 +6,7 @@
 #include <QCloseEvent>
 
 // https://www.jetbrains.com/help/clion/overriding-methods-of-a-superclass.html
+// https://doc.qt.io/archives/qq/qq11-events.html
 
 class MainWindow: public QMainWindow
 {
