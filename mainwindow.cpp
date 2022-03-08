@@ -57,12 +57,6 @@ void MainWindow::leaveEvent(QEvent *event)
 }
 void MainWindow::keyPressEvent(QKeyEvent *event)
 {
-//    qDebug() << "<< KeyPressEvent >> " << event->key() << ": " << event->text();
-
-//    if (event->modifiers() & Qt::ShiftModifier) {
-//        qDebug() << "Shift + " << event->text();
-//    }
-
     if (event->modifiers() & Qt::ControlModifier) {
         qDebug() << "Control + " << event->text();
     }
@@ -77,4 +71,12 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
         else
             qDebug() << "Shift + " << event->text();
     }
+}
+void MainWindow::resizeEvent(QResizeEvent *event)
+{
+    qDebug() << "<< ResizeEvent >> Old size: " << event->oldSize() << " New size: " << event->size();
+}
+void MainWindow::paintEvent(QPaintEvent *event)
+{
+    qDebug() << "<< PaintEvent >> triggered";
 }
