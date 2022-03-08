@@ -3,30 +3,26 @@
 
 #include <QMainWindow>
 #include <iostream>
+#include <QCloseEvent>
 
 class MainWindow: public QMainWindow
 {
 Q_OBJECT
-
 public:
-    MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+    explicit MainWindow(QWidget *parent = nullptr);
+    ~MainWindow() override;
 
     auto createMenus() -> void;
     auto createToolBars() -> void;
 
 private:
-    QAction * newAct;
-    QAction * quitAct;
+    QAction *newAct;
+    QAction *quitAct;
 
 protected:
-    void mousePressEvent(QMouseEvent *event) override {
-
-    }
-
-    void closeEvent(QCloseEvent *event) override {
-        std::cout << "<< CloseEvent >>" << std::endl;
-    }
+    void mouseMoveEvent(QMouseEvent *event) override;
+    void mousePressEvent(QMouseEvent *event) override;
+    void closeEvent(QCloseEvent *event) override;
 
 };
 #endif // MAINWINDOW_H

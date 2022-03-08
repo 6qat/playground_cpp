@@ -24,3 +24,16 @@ auto MainWindow::createToolBars() -> void
 {
     auto fileToolBar = addToolBar(tr("File"));
 }
+void MainWindow::mouseMoveEvent(QMouseEvent *event)
+{
+    QWidget::mouseMoveEvent(event);
+}
+void MainWindow::mousePressEvent(QMouseEvent *event)
+{
+
+}
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+    std::cout << "<< CloseEvent >>: " << event->type() << std::endl;
+    event->accept();
+}
