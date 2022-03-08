@@ -59,17 +59,22 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
 {
 //    qDebug() << "<< KeyPressEvent >> " << event->key() << ": " << event->text();
 
-    if (event->modifiers() & Qt::ShiftModifier) {
-        qDebug() << "Shift + " << event->text();
-    }
+//    if (event->modifiers() & Qt::ShiftModifier) {
+//        qDebug() << "Shift + " << event->text();
+//    }
+
     if (event->modifiers() & Qt::ControlModifier) {
         qDebug() << "Control + " << event->text();
     }
+
     if (event->modifiers() & Qt::AltModifier) {
         qDebug() << "Alt + " << event->text();
     }
+
     if (event->modifiers() & Qt::ShiftModifier) {
-        if(event->key() == Qt::Key_A)
-            qDebug() << "Shift + " << event->text() << "(Shift+A pressed)";
+        if (event->key() == Qt::Key_A)
+            qDebug() << "Shift + " << event->text() << "(Shift+A detected)";
+        else
+            qDebug() << "Shift + " << event->text();
     }
 }
