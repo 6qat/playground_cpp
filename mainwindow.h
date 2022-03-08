@@ -20,12 +20,15 @@ public:
 private:
     QAction *newAct;
     QAction *quitAct;
+
 protected:
+    void enterEvent(QEnterEvent *event) override;
     void contextMenuEvent(QContextMenuEvent *event) override;
-protected:
+    void keyPressEvent(QKeyEvent *event) override;
     void mouseMoveEvent(QMouseEvent *event) override;
     void mousePressEvent(QMouseEvent *event) override;
     void closeEvent(QCloseEvent *event) override;
+    void leaveEvent(QEvent *event) override;
 
 };
 #endif // MAINWINDOW_H

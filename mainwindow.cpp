@@ -41,9 +41,35 @@ void MainWindow::closeEvent(QCloseEvent *event)
 }
 void MainWindow::contextMenuEvent(QContextMenuEvent *event)
 {
-    qDebug() << "<< ContextMenu Event >>";
+    qDebug() << "<< ContextMenuEvent >>";
     auto *menu = new QMenu(this);
     menu->addAction(tr("Action 1"));
     menu->addAction(tr("Action 2"));
     menu->popup(mapToGlobal(event->pos()));
+}
+void MainWindow::enterEvent(QEnterEvent *event)
+{
+    qDebug() << "<< EnterEvent >>";
+}
+void MainWindow::leaveEvent(QEvent *event)
+{
+    qDebug() << "<< LeaveEvent >>";
+}
+void MainWindow::keyPressEvent(QKeyEvent *event)
+{
+//    qDebug() << "<< KeyPressEvent >> " << event->key() << ": " << event->text();
+
+    if (event->modifiers() & Qt::ShiftModifier) {
+        qDebug() << "Shift + " << event->text();
+    }
+    if (event->modifiers() & Qt::ControlModifier) {
+        qDebug() << "Control + " << event->text();
+    }
+    if (event->modifiers() & Qt::AltModifier) {
+        qDebug() << "Alt + " << event->text();
+    }
+    if (event->modifiers() & Qt::ShiftModifier) {
+        if(event->key() == Qt::Key_A)
+            qDebug() << "Shift + " << event->text() << "(Shift+A pressed)";
+    }
 }
