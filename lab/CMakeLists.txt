@@ -12,4 +12,5 @@ qt_add_qml_module(lab_module
             Other.qml
         SOURCES
             Lab.cpp Lab.h
+        cpp20features.cpp
         )
