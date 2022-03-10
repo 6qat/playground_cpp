@@ -3,30 +3,33 @@
 #include <QMouseEvent>
 #include <QMessageBox>
 #include <QApplication>
+#include <QStatusBar>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
-
     createMenus();
+    createStatusBar();
 }
 MainWindow::~MainWindow()
-{}
+= default;
 
 auto MainWindow::createMenus() -> void
 {
     auto fileMenu = this->menuBar()->addMenu(tr("&File"));
     auto helpMenu = this->menuBar()->addMenu(tr("&Help"));
 
-    auto *newAct = new QAction(tr("&New"), this);
-    auto *quitAct = new QAction(tr("&Quit"), this);
+    auto newAct = new QAction(tr("&New"), this);
+    auto quitAct = new QAction(tr("&Quit"), this);
     connect(quitAct, &QAction::triggered, this, &MainWindow::close);
 
     fileMenu->addAction(newAct);
     fileMenu->addSeparator();
     fileMenu->addAction(quitAct);
 
-    QAction *aboutQtAct = helpMenu->addAction(tr("About &Qt"), qApp, &QApplication::aboutQt);
+    // #define qApp (static_cast<QApplication *>(QCoreApplication::instance()))
+    auto app = (dynamic_cast<QApplication *>(QCoreApplication::instance()));
+    auto aboutQtAct = helpMenu->addAction(tr("About &Qt"), app, &QApplication::aboutQt);
     aboutQtAct->setStatusTip(tr("Show the Qt library's About box"));
 }
 auto MainWindow::createToolBars() -> void
@@ -46,15 +49,15 @@ void MainWindow::closeEvent(QCloseEvent *event)
 {
     qDebug() << "<< CloseEvent >> " << event->type();
 
-    const QMessageBox::StandardButton ret
-        = QMessageBox::warning(this, tr("Application"),
-                               tr("Do you really want to leave?"),
-                               QMessageBox::Ok | QMessageBox::Cancel);
-
-
-    if(ret == QMessageBox::Ok)
-        event->accept();
-    else event->ignore();
+//    const QMessageBox::StandardButton ret
+//        = QMessageBox::warning(this, tr("Application"),
+//                               tr("Do you really want to leave?"),
+//                               QMessageBox::Ok | QMessageBox::Cancel);
+//
+//
+//    if (ret == QMessageBox::Ok)
+//        event->accept();
+//    else event->ignore();
 }
 void MainWindow::contextMenuEvent(QContextMenuEvent *event)
 {
@@ -96,4 +99,8 @@ void MainWindow::resizeEvent(QResizeEvent *event)
 void MainWindow::paintEvent(QPaintEvent *event)
 {
     qDebug() << "<< PaintEvent >> triggered";
+}
+auto MainWindow::createStatusBar() -> void
+{
+    statusBar()->showMessage(tr("Ready"));
 }

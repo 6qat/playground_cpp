@@ -17,6 +17,7 @@ public:
 
     auto createMenus() -> void;
     auto createToolBars() -> void;
+    auto createStatusBar() -> void;
 
 private:
 
