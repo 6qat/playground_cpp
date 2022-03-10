@@ -1,13 +1,12 @@
 #include "mainwindow.h"
 #include <QMenuBar>
 #include <QMouseEvent>
+#include <QMessageBox>
+#include <QApplication>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
-    newAct = new QAction(tr("&New"), this);
-    quitAct = new QAction(tr("&Quit"), this);
-    connect(quitAct, &QAction::triggered, this, &MainWindow::close);
 
     createMenus();
 }
@@ -17,9 +16,18 @@ MainWindow::~MainWindow()
 auto MainWindow::createMenus() -> void
 {
     auto fileMenu = this->menuBar()->addMenu(tr("&File"));
+    auto helpMenu = this->menuBar()->addMenu(tr("&Help"));
+
+    auto *newAct = new QAction(tr("&New"), this);
+    auto *quitAct = new QAction(tr("&Quit"), this);
+    connect(quitAct, &QAction::triggered, this, &MainWindow::close);
+
     fileMenu->addAction(newAct);
     fileMenu->addSeparator();
     fileMenu->addAction(quitAct);
+
+    QAction *aboutQtAct = helpMenu->addAction(tr("About &Qt"), qApp, &QApplication::aboutQt);
+    aboutQtAct->setStatusTip(tr("Show the Qt library's About box"));
 }
 auto MainWindow::createToolBars() -> void
 {
@@ -37,7 +45,16 @@ void MainWindow::mousePressEvent(QMouseEvent *event)
 void MainWindow::closeEvent(QCloseEvent *event)
 {
     qDebug() << "<< CloseEvent >> " << event->type();
-    event->accept();
+
+    const QMessageBox::StandardButton ret
+        = QMessageBox::warning(this, tr("Application"),
+                               tr("Do you really want to leave?"),
+                               QMessageBox::Ok | QMessageBox::Cancel);
+
+
+    if(ret == QMessageBox::Ok)
+        event->accept();
+    else event->ignore();
 }
 void MainWindow::contextMenuEvent(QContextMenuEvent *event)
 {

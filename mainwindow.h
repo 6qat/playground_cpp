@@ -19,8 +19,7 @@ public:
     auto createToolBars() -> void;
 
 private:
-    QAction *newAct;
-    QAction *quitAct;
+
 
 protected:
     void enterEvent(QEnterEvent *event) override;
