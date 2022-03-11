@@ -8,13 +8,13 @@ set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 #find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
 find_package(Qt6 6.2 REQUIRED COMPONENTS Quick WebSockets Widgets QuickControls2)
-
 find_package(Protobuf CONFIG REQUIRED)
+find_package(Boost REQUIRED)
 
 add_subdirectory(lab)
 
@@ -32,6 +32,7 @@ qt_add_executable(temp_qt
 target_link_libraries(temp_qt PRIVATE
         lab_module   #plugin
         protobuf::libprotobuf
+        Boost::boost
         )
 
 target_link_libraries(temp_qt PRIVATE Qt6::Quick Qt6::WebSockets Qt6::Widgets Qt6::QuickControls2)

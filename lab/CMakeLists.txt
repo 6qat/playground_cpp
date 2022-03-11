@@ -7,7 +7,7 @@ cmake_policy(SET CMP0071 NEW)
 
 qt_add_executable(temp_lab
         MANUAL_FINALIZATION
-        move.cpp
+        modernCpp.cpp
         )
 
 
@@ -19,5 +19,5 @@ qt_add_qml_module(lab_module
         SOURCES
             Lab.cpp Lab.h
             cpp20features.cpp
-            move.cpp
+        modernCpp.cpp
         )
