@@ -1,6 +1,10 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <map>
+void strings();
+void vectors();
+void userDefined();
 using namespace std;
 
 std::vector<std::string> createAndInsertOldWay()
@@ -50,6 +54,42 @@ auto main(int argc, char *argv[]) -> int
     func(1, 2, 3);
     func({1, 2, 3});
 
+    vectors();
+    strings();
+    userDefined();
+
+}
+
+auto userDefined() -> void
+{
+    class foo
+    {
+        int a_;
+        double b_;
+    public:
+        foo()
+            : a_(0), b_(0)
+        {}
+        foo(int a, double b = 0.0)
+            : a_(a), b_(b)
+        {}
+    };
+
+    foo f1{};
+    foo f2{42, 1.2};
+    foo f3{42};
+
+    struct bar
+    {
+        int a_;
+        double b_;
+    };
+    bar b{42, 1.2};
+
+}
+
+auto vectors() -> void
+{
     vector<int> v1{5};
     vector<int> v2(5);
     vector<int> v3({5});
@@ -58,6 +98,25 @@ auto main(int argc, char *argv[]) -> int
     auto v5 = vector<int>(5);
     auto v6 = vector<int>({5});
 
+    std::vector<int> v{1, 2, 3};
+    std::map<int, std::string> m{{1, "one"}, {2, "two"}};
+
+    int *arr2 = new int[3]{1, 2, 3};
+
+    int arr1[3]{1, 2, 3};
+
+    int i{42};
+    double d{1.2};
+
+}
+auto strings() -> void
+{
+    string s1("t");   // direct initialization
+    string s2 = "t";  //  copy initialization
+
+    auto s3 = string("t");
+    auto s4 = string{"t"};
+    auto s5 = "t";
 }
 
 
