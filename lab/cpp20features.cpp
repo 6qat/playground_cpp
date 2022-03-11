@@ -14,9 +14,11 @@
  *
  */
 
-consteval int sqr(int n) {
+consteval int sqr(int n)
+{
     return n * n;
 }
+
 constexpr int r = sqr(100); // OK
 int x = 100;
 
@@ -28,26 +30,39 @@ int x = 100;
  * Using ENUM
  */
 
-enum class rgba_color_channel { red, green, blue, alpha };
+enum class rgba_color_channel
+{
+    red, green, blue, alpha
+};
 
 // Bring an enum's members into scope to improve readability. Before:
-std::string_view to_string(rgba_color_channel channel) {
+std::string_view to_string(rgba_color_channel channel)
+{
     switch (channel) {
-        case rgba_color_channel::red:   return "red";
-        case rgba_color_channel::green: return "green";
-        case rgba_color_channel::blue:  return "blue";
-        case rgba_color_channel::alpha: return "alpha";
+        case rgba_color_channel::red:
+            return "red";
+        case rgba_color_channel::green:
+            return "green";
+        case rgba_color_channel::blue:
+            return "blue";
+        case rgba_color_channel::alpha:
+            return "alpha";
     }
 }
 // AFTER
 
-std::string_view to_string2(rgba_color_channel my_channel) {
+std::string_view to_string2(rgba_color_channel my_channel)
+{
     switch (my_channel) {
         using enum rgba_color_channel;
-        case red:   return "red";
-        case green: return "green";
-        case blue:  return "blue";
-        case alpha: return "alpha";
+        case red:
+            return "red";
+        case green:
+            return "green";
+        case blue:
+            return "blue";
+        case alpha:
+            return "alpha";
     }
 }
 
@@ -77,7 +92,7 @@ concept unsigned_integral = integral<T> && !signed_integral<T>;
  * https://www.geeksforgeeks.org/3-way-comparison-operator-space-ship-operator-in-c-20/
  */
 
-auto threeWayComparison() -> void
+auto threeWayComparison()
 {
     int a = 91, b = 110;
     auto ans1 = a <=> b;
@@ -112,7 +127,7 @@ auto threeWayComparison() -> void
  *
 */
 
-auto mapSetContains() -> void
+auto mapSetContains()
 {
     std::map<int, char> M = {{1, 'a'},
                              {2, 'b'}};
@@ -136,7 +151,7 @@ auto mapSetContains() -> void
  *
  */
 
-auto rangeBasedForLoopWithInitialization() -> void
+auto rangeBasedForLoopWithInitialization()
 {
     for (std::vector v{1, 2, 3}; auto &e : v) {
         std::cout << e;
@@ -167,7 +182,7 @@ auto fibonacci(unsigned n) -> long
     return fibonacci(n - 1) + fibonacci(n - 2);
 }
 
-auto calendarTimeZoneLibrary() -> void
+auto calendarTimeZoneLibrary()
 {
     using namespace std::chrono;
     using namespace std;
@@ -203,7 +218,7 @@ auto calendarTimeZoneLibrary() -> void
  *
 */
 
-auto arrayBoundedUnbounded() -> void
+auto arrayBoundedUnbounded()
 {
 
     class A
@@ -226,7 +241,7 @@ auto arrayBoundedUnbounded() -> void
  *
 */
 
-auto stdToArray() -> void
+auto stdToArray()
 {
     auto x = std::to_array("Geeks");
 
