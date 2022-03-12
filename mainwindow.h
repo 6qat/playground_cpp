@@ -16,8 +16,9 @@ public:
     ~MainWindow() override;
 
     auto createMenus() -> void;
-    auto createToolBars() -> void;
+    [[maybe_unused]] auto createToolBars() -> void;
     auto createStatusBar() -> void;
+    auto createMainScreen() -> void;
 
 private:
 

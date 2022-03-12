@@ -1,15 +1,19 @@
 #include "mainwindow.h"
 #include <QMenuBar>
 #include <QMouseEvent>
-#include <QMessageBox>
 #include <QApplication>
 #include <QStatusBar>
+#include <QVBoxLayout>
+#include <QPushButton>
+#include <QGroupBox>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
     createMenus();
     createStatusBar();
+    createMainScreen();
+
 }
 MainWindow::~MainWindow()
 = default;
@@ -34,8 +38,9 @@ auto MainWindow::createMenus() -> void
 
     aboutQtAct->setStatusTip(tr("Show the Qt library's About box"));
 }
-auto MainWindow::createToolBars() -> void
+[[maybe_unused]] auto MainWindow::createToolBars() -> void
 {
+    [[maybe_unused]]
     auto fileToolBar = addToolBar(tr("File"));
 }
 auto MainWindow::mouseMoveEvent(QMouseEvent *event) -> void
@@ -105,4 +110,24 @@ auto MainWindow::paintEvent(QPaintEvent *event) -> void
 auto MainWindow::createStatusBar() -> void
 {
     statusBar()->showMessage(tr("Ready"));
+}
+auto MainWindow::createMainScreen() -> void
+{
+    auto widget = new QWidget;
+    auto mainLayout = new QVBoxLayout(widget);
+
+    auto horizontalConnectGroupBox = new QGroupBox(tr("Connect"));
+
+    auto connectLayout = new QHBoxLayout;
+    auto connectButton = new QPushButton(tr("Connect"));
+
+    connectLayout->addWidget(connectButton);
+    horizontalConnectGroupBox->setLayout(connectLayout);
+
+    mainLayout->addWidget(horizontalConnectGroupBox);
+
+    this->setCentralWidget(widget);
+
+
+    setWindowTitle("Just testing...");
 }
