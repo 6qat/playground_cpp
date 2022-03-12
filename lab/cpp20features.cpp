@@ -5,6 +5,7 @@
 #include <iostream>
 #include <chrono>
 #include <array>
+#include <ctime>
 
 // https://en.cppreference.com/w/cpp/types/is_signed
 // https://www.geeksforgeeks.org/features-of-c-20/

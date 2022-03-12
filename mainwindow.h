@@ -23,15 +23,15 @@ private:
 
 
 protected:
-    void enterEvent(QEnterEvent *event) override;
-    void contextMenuEvent(QContextMenuEvent *event) override;
-    void keyPressEvent(QKeyEvent *event) override;
-    void mouseMoveEvent(QMouseEvent *event) override;
-    void resizeEvent(QResizeEvent *event) override;
-    void mousePressEvent(QMouseEvent *event) override;
-    void closeEvent(QCloseEvent *event) override;
-    void leaveEvent(QEvent *event) override;
-    void paintEvent(QPaintEvent *event) override;
+    auto enterEvent(QEnterEvent *event) -> void override;
+    auto contextMenuEvent(QContextMenuEvent *event) -> void override;
+    auto keyPressEvent(QKeyEvent *event) -> void override;
+    auto mouseMoveEvent(QMouseEvent *event) -> void override;
+    auto resizeEvent(QResizeEvent *event) -> void override;
+    auto mousePressEvent(QMouseEvent *event) -> void override;
+    auto closeEvent(QCloseEvent *event) -> void override;
+    auto leaveEvent(QEvent *event) -> void override;
+    auto paintEvent(QPaintEvent *event) -> void override;
 
 };
 #endif // MAINWINDOW_H

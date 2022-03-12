@@ -32,7 +32,7 @@ qt_add_executable(temp_qt
 target_link_libraries(temp_qt PRIVATE
         lab_module   #plugin
         protobuf::libprotobuf
-#        Boost::boost
+        Boost::boost
         )
 
 target_link_libraries(temp_qt PRIVATE

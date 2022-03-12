@@ -21,6 +21,7 @@ auto MainWindow::createMenus() -> void
 
     auto newAct = new QAction(tr("&New"), this);
     auto quitAct = new QAction(tr("&Quit"), this);
+
     connect(quitAct, &QAction::triggered, this, &MainWindow::close);
 
     fileMenu->addAction(newAct);
@@ -30,22 +31,23 @@ auto MainWindow::createMenus() -> void
     // #define qApp (static_cast<QApplication *>(QCoreApplication::instance()))
     auto app = (dynamic_cast<QApplication *>(QCoreApplication::instance()));
     auto aboutQtAct = helpMenu->addAction(tr("About &Qt"), app, &QApplication::aboutQt);
+
     aboutQtAct->setStatusTip(tr("Show the Qt library's About box"));
 }
 auto MainWindow::createToolBars() -> void
 {
     auto fileToolBar = addToolBar(tr("File"));
 }
-void MainWindow::mouseMoveEvent(QMouseEvent *event)
+auto MainWindow::mouseMoveEvent(QMouseEvent *event) -> void
 {
     QWidget::mouseMoveEvent(event);
     qDebug() << "<< MouseMoveEvent >> " << event->pos();
 }
-void MainWindow::mousePressEvent(QMouseEvent *event)
+auto MainWindow::mousePressEvent(QMouseEvent *event) -> void
 {
     qDebug() << "<< MousePressEvent >> " << event->pos();
 }
-void MainWindow::closeEvent(QCloseEvent *event)
+auto MainWindow::closeEvent(QCloseEvent *event) -> void
 {
     qDebug() << "<< CloseEvent >> " << event->type();
 
@@ -59,7 +61,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
 //        event->accept();
 //    else event->ignore();
 }
-void MainWindow::contextMenuEvent(QContextMenuEvent *event)
+auto MainWindow::contextMenuEvent(QContextMenuEvent *event) -> void
 {
     qDebug() << "<< ContextMenuEvent >>";
     auto *menu = new QMenu(this);
@@ -67,15 +69,15 @@ void MainWindow::contextMenuEvent(QContextMenuEvent *event)
     menu->addAction(tr("Action 2"));
     menu->popup(mapToGlobal(event->pos()));
 }
-void MainWindow::enterEvent(QEnterEvent *event)
+auto MainWindow::enterEvent(QEnterEvent *event) -> void
 {
     qDebug() << "<< EnterEvent >>";
 }
-void MainWindow::leaveEvent(QEvent *event)
+auto MainWindow::leaveEvent(QEvent *event) -> void
 {
     qDebug() << "<< LeaveEvent >>";
 }
-void MainWindow::keyPressEvent(QKeyEvent *event)
+auto MainWindow::keyPressEvent(QKeyEvent *event) -> void
 {
     if (event->modifiers() & Qt::ControlModifier) {
         qDebug() << "Control + " << event->text();
@@ -92,11 +94,11 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
             qDebug() << "Shift + " << event->text();
     }
 }
-void MainWindow::resizeEvent(QResizeEvent *event)
+auto MainWindow::resizeEvent(QResizeEvent *event) -> void
 {
     qDebug() << "<< ResizeEvent >> Old size: " << event->oldSize() << " New size: " << event->size();
 }
-void MainWindow::paintEvent(QPaintEvent *event)
+auto MainWindow::paintEvent(QPaintEvent *event) -> void
 {
     qDebug() << "<< PaintEvent >> triggered";
 }
