@@ -6,6 +6,7 @@
 #include <QVBoxLayout>
 #include <QPushButton>
 #include <QGroupBox>
+#include<QLineEdit>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -116,15 +117,18 @@ auto MainWindow::createMainScreen() -> void
     auto widget = new QWidget;
     auto mainLayout = new QVBoxLayout(widget);
 
-    auto horizontalConnectGroupBox = new QGroupBox(tr("Connect"));
+    auto horizontalConnectGroupBox = new QGroupBox(tr("Connect to server"));
+    auto connectLayout = new QHBoxLayout(horizontalConnectGroupBox);
 
-    auto connectLayout = new QHBoxLayout;
     auto connectButton = new QPushButton(tr("Connect"));
+    auto addressEdit = new QLineEdit;
 
+    connectLayout->addWidget(addressEdit);
     connectLayout->addWidget(connectButton);
-    horizontalConnectGroupBox->setLayout(connectLayout);
+    connectLayout->addStretch();
 
     mainLayout->addWidget(horizontalConnectGroupBox);
+    mainLayout->addStretch();
 
     this->setCentralWidget(widget);
 
