@@ -19,5 +19,5 @@ qt_add_qml_module(lab_module
         SOURCES
             Lab.cpp Lab.h
             cpp20features.cpp
-        modernCpp.cpp
+            modernCpp.cpp
         )

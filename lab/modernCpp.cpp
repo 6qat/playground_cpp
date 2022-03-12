@@ -200,7 +200,7 @@ auto strings() -> void
     wcout << s6 << endl; // wchar_t*
     cout << reinterpret_cast<const char *>(s7) << endl; // char8_t*
     wcout << reinterpret_cast<const wchar_t *>(s8) << endl; // char16_t*
-    wcout << s9 << endl; // char32_t*
+//    wcout << s9 << endl; // char32_t*
 
     cout << s10 << endl; // char16_t*
     cout << reinterpret_cast<const char *>(s12) << endl; // char16_t*
