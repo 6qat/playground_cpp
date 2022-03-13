@@ -20,8 +20,10 @@ add_subdirectory(lab)
 
 set(PROJECT_SOURCES
         main.cpp
-        mainwindow.cpp
-        mainwindow.h
+        MainWindow.cpp
+        MainWindow.h
+        ServerConnection.cpp
+        ServerConnection.h
 )
 
 qt_add_executable(temp_qt

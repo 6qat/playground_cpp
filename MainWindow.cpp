@@ -1,4 +1,4 @@
-#include "mainwindow.h"
+#include "MainWindow.h"
 #include <QMenuBar>
 #include <QMouseEvent>
 #include <QApplication>
@@ -121,6 +121,7 @@ auto MainWindow::createMainScreen() -> void
     auto connectLayout = new QHBoxLayout(horizontalConnectGroupBox);
 
     auto connectButton = new QPushButton(tr("Connect"));
+    connectButton->setCheckable(true);
     auto addressEdit = new QLineEdit;
 
     connectLayout->addWidget(addressEdit);
