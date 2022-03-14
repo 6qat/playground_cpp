@@ -5,9 +5,13 @@ qt_add_library(lab_module STATIC)
 # https://cmake.org/cmake/help/git-stage/command/cmake_policy.html#command:cmake_policy
 cmake_policy(SET CMP0071 NEW)
 
-qt_add_executable(temp_lab
+qt_add_executable(temp_lab1
         MANUAL_FINALIZATION
         modernCpp.cpp
+        )
+qt_add_executable(temp_lab2
+        MANUAL_FINALIZATION
+        ranges.cpp
         )
 
 
@@ -20,4 +24,5 @@ qt_add_qml_module(lab_module
             Lab.cpp Lab.h
             cpp20features.cpp
             modernCpp.cpp
+            ranges.cpp
         )
