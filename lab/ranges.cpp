@@ -8,6 +8,8 @@
 #include <concepts>
 #include <algorithm>
 
+//import std.core;
+
 // From the video: https://www.youtube.com/watch?v=3MBtLeyJKg0&t=475
 
 
@@ -65,14 +67,26 @@ namespace views
 constexpr auto fibonacci = std::ranges::subrange<fib_iterator, std::unreachable_sentinel_t>{};
 }
 
-void fibfun(int n, int k) {
+auto fibfun(int n, int k)
+{
 
 	auto view = views::fibonacci
-		| std::views::filter([k](auto i) {return i % k == 0;})
+		| std::views::filter([k](auto i)
+							 { return i % k == 0; })
 		| std::views::take(n);
 
 	std::ranges::copy(view, std::ostream_iterator<std::size_t>(std::cout, " ,"));
+
 }
+
+inline constexpr auto trim_front = std::views::drop_while(std::isspace);
+
+inline constexpr auto trim_back =
+	std::views::reverse
+		| trim_front
+		| std::views::reverse;
+
+inline constexpr auto trim = trim_front | trim_back;
 
 auto main() -> int
 {
