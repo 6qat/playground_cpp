@@ -4,7 +4,6 @@
 #include <map>
 #include <array>
 #include <string>
-#include <xstring>
 
 void strings();
 void vectors();
