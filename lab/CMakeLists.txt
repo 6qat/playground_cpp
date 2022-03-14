@@ -9,8 +9,8 @@ cmake_policy(SET CMP0071 NEW)
 if(NOT EXISTS "${CMAKE_BINARY_DIR}/conan.cmake")
     message(
             STATUS
-            "Downloading conan.cmake from https://github.com/conan-io/cmake-conan")
-    file(DOWNLOAD "https://github.com/conan-io/cmake-conan/raw/v0.16.1/conan.cmake"
+            "Downloading conan.cmake from https://raw.githubusercontent.com/conan-io/cmake-conan/develop/")
+    file(DOWNLOAD "https://raw.githubusercontent.com/conan-io/cmake-conan/develop/conan.cmake"
             "${CMAKE_BINARY_DIR}/conan.cmake")
 endif()
 include(${CMAKE_BINARY_DIR}/conan.cmake) # Include Conan-generated file
@@ -19,6 +19,7 @@ conan_cmake_run(
         REQUIRES
             range-v3/0.11.0
             protobuf/3.19.2
+            quickfix/1.15.1
         BASIC_SETUP CMAKE_TARGETS
         BUILD missing
 )
@@ -32,10 +33,10 @@ target_link_libraries(modern PRIVATE
         CONAN_PKG::protobuf
         )
 
-#qt_add_executable(ranges
-#        MANUAL_FINALIZATION
-#        ranges.cpp
-#        )
+qt_add_executable(ranges
+        MANUAL_FINALIZATION
+        ranges.cpp
+        )
 
 qt_add_executable(rangev3
         MANUAL_FINALIZATION

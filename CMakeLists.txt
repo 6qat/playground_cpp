@@ -12,13 +12,13 @@ set(CMAKE_AUTORCC ON)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-#set(CMAKE_CXX20_STANDARD_COMPILE_OPTION "-std:c++latest" "/interface" "/TP")
-#set(CMAKE_CXX20_EXTENSION_COMPILE_OPTION "-std:c++latest" "/interface" "/TP")
+set(CMAKE_CXX20_STANDARD_COMPILE_OPTION "-std:c++latest" "/interface" "/TP")
+set(CMAKE_CXX20_EXTENSION_COMPILE_OPTION "-std:c++latest" "/interface" "/TP")
 #set(CMAKE_CXX_FLAGS "-std:c++latest /interface /TP")
 #set(CMAKE_CXX_FLAGS "/std:c++latest")
 
-set(CMAKE_CXX20_STANDARD_COMPILE_OPTION "-std=gnu++20")
-set(CMAKE_CXX20_EXTENSION_COMPILE_OPTION "-std=gnu++20")
+#set(CMAKE_CXX20_STANDARD_COMPILE_OPTION "-std=gnu++20")
+#set(CMAKE_CXX20_EXTENSION_COMPILE_OPTION "-std=gnu++20")
 # Edit file ~/.conan/profiles/mingw64 first.
 # Create conanfile.txt in project root.
 # conan install .. --build=missing --profile=mingw64
@@ -47,8 +47,8 @@ qt_add_executable(temp_qt
 if(NOT EXISTS "${CMAKE_BINARY_DIR}/conan.cmake")
     message(
             STATUS
-            "Downloading conan.cmake from https://github.com/conan-io/cmake-conan")
-    file(DOWNLOAD "https://github.com/conan-io/cmake-conan/raw/v0.16.1/conan.cmake"
+            "Downloading conan.cmake from https://raw.githubusercontent.com/conan-io/cmake-conan/develop/")
+    file(DOWNLOAD "https://raw.githubusercontent.com/conan-io/cmake-conan/develop/conan.cmake"
             "${CMAKE_BINARY_DIR}/conan.cmake")
 endif()
 include(${CMAKE_BINARY_DIR}/conan.cmake) # Include Conan-generated file
