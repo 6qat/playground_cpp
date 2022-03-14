@@ -7,6 +7,7 @@
 #include <vector>
 #include <concepts>
 #include <algorithm>
+#include <optional>
 
 //import std.core;
 
@@ -17,6 +18,14 @@
 // https://en.cppreference.com/w/cpp/utility/exchange
 // https://en.cppreference.com/w/cpp/named_req/MoveConstructible
 // https://en.cppreference.com/w/cpp/language/operators
+
+template<class F, class I>
+concept indirect_unary_predicate =
+std::indirectly_readable<I> &&
+	std::copy_constructible<F> &&
+	std::predicate<F &, std::iter_value_t<I> &> &&
+	std::predicate<F &, std::iter_reference_t<I>> &&
+	std::predicate<F &, std::iter_common_reference_t<I>>;
 
 struct fib_generator
 {
@@ -85,8 +94,46 @@ inline constexpr auto trim_back =
 	std::views::reverse
 		| trim_front
 		| std::views::reverse;
+//inline constexpr auto trim_back2 = drop_last_while(std::isspace);
 
 inline constexpr auto trim = trim_front | trim_back;
+
+template<std::ranges::view  V, typename Pred> requires std::ranges::bidirectional_range<V> &&
+	indirect_unary_predicate<Pred, std::ranges::iterator_t<V>>
+class drop_last_while_view
+	: public std::ranges::view_interface<drop_last_while_view<V, Pred>>
+{
+	V base_;
+	Pred pred_;
+	std::optional<std::ranges::iterator_t<V>> cached_end_;
+
+public:
+	drop_last_while_view() = default;
+
+	drop_last_while_view(V base, Pred pred)
+		: base_(std::move(base)),
+		  pred_(std::move(pred))
+	{}
+
+	auto begin()
+	{
+		return std::ranges::begin(base_);
+	}
+
+	auto end()
+	{
+		if (!cached_end_) {
+			cached_end_ = std::ranges::find_if_not(std::ranges::rbegin(base_),
+												   std::ranges::rend(base_),
+												   pred_).base();
+		}
+		return *cached_end_;
+
+	}
+
+	// https://d.pr/i/0Gp60u
+
+};
 
 auto main() -> int
 {
