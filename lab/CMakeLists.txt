@@ -1,4 +1,5 @@
 project(lab_module)
+#set(CMAKE_CXX_FLAGS "/std:c++latest")
 
 qt_add_library(lab_module STATIC)
 

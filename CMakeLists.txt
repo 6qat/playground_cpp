@@ -10,6 +10,9 @@ set(CMAKE_AUTORCC ON)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX20_STANDARD_COMPILE_OPTION "-std:c++latest")
+set(CMAKE_CXX20_EXTENSION_COMPILE_OPTION "-std:c++latest")
+#set(CMAKE_CXX_FLAGS "/std:c++latest")
 
 #find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
 find_package(Qt6 6.2 REQUIRED COMPONENTS Quick WebSockets Widgets QuickControls2)
