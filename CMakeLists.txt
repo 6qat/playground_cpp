@@ -17,6 +17,13 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 #set(CMAKE_CXX_FLAGS "-std:c++latest /interface /TP")
 #set(CMAKE_CXX_FLAGS "/std:c++latest")
 
+set(CMAKE_CXX20_STANDARD_COMPILE_OPTION "-std=gnu++20")
+set(CMAKE_CXX20_EXTENSION_COMPILE_OPTION "-std=gnu++20")
+# Edit file ~/.conan/profiles/mingw64 first.
+# Create conanfile.txt in project root.
+# conan install .. --build=missing --profile=mingw64
+# cmake -G "MinGW Makefiles" ../
+
 #find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
 find_package(Qt6 6.2 REQUIRED COMPONENTS Quick WebSockets Widgets QuickControls2)
 #find_package(Protobuf CONFIG REQUIRED)
@@ -37,8 +44,29 @@ qt_add_executable(temp_qt
     ${PROJECT_SOURCES}
 )
 
+if(NOT EXISTS "${CMAKE_BINARY_DIR}/conan.cmake")
+    message(
+            STATUS
+            "Downloading conan.cmake from https://github.com/conan-io/cmake-conan")
+    file(DOWNLOAD "https://github.com/conan-io/cmake-conan/raw/v0.16.1/conan.cmake"
+            "${CMAKE_BINARY_DIR}/conan.cmake")
+endif()
+include(${CMAKE_BINARY_DIR}/conan.cmake) # Include Conan-generated file
+conan_check(REQUIRED) # Introduce Conan-generated targets
+conan_cmake_run(
+        REQUIRES
+        range-v3/0.11.0
+        protobuf/3.19.2
+        boost/1.78.0
+        BASIC_SETUP CMAKE_TARGETS
+        BUILD missing
+)
+
 target_link_libraries(temp_qt PRIVATE
         lab_module   #plugin
+        CONAN_PKG::range-v3
+        CONAN_PKG::protobuf
+        CONAN_PKG::boost
 #        protobuf::libprotobuf
 #        Boost::boost
         )
