@@ -46,6 +46,9 @@ qt_add_executable(rangev3
         MANUAL_FINALIZATION
         rangev3.cpp
         )
+target_link_libraries(rangev3 PRIVATE
+        CONAN_PKG::range-v3
+        )
 
 
 qt_add_qml_module(lab_module
