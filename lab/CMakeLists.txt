@@ -26,30 +26,36 @@ conan_cmake_run(
 
 qt_add_executable(modern
         MANUAL_FINALIZATION
-        modernCpp.cpp
+            modernCpp.cpp
         )
-target_link_libraries(modern PRIVATE
-        CONAN_PKG::range-v3
-        CONAN_PKG::protobuf
+target_link_libraries(modern
+        PRIVATE
+            CONAN_PKG::range-v3
+            CONAN_PKG::protobuf
         )
 qt_add_executable(cpp20
         MANUAL_FINALIZATION
-        cpp20features.cpp
+            cpp20features.cpp
         )
 
 qt_add_executable(ranges
         MANUAL_FINALIZATION
-        ranges.cpp
+            ranges.cpp
         )
 
 qt_add_executable(rangev3
         MANUAL_FINALIZATION
-        rangev3.cpp
+            rangev3.cpp
         )
-target_link_libraries(rangev3 PRIVATE
-        CONAN_PKG::range-v3
+target_link_libraries(rangev3
+        PRIVATE
+            CONAN_PKG::range-v3
         )
 
+qt_add_executable(random
+        MANUAL_FINALIZATION
+        pseudo-random.cpp
+        )
 
 qt_add_qml_module(lab_module
         URI "lab"
