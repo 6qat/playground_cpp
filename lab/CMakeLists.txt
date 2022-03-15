@@ -21,6 +21,7 @@ conan_cmake_run(
             protobuf/3.19.2
             quickfix/1.15.1
             boost/1.78.0
+            rxcpp/4.1.1
         BASIC_SETUP CMAKE_TARGETS
         BUILD missing
 )
@@ -34,6 +35,16 @@ target_link_libraries(modern
             CONAN_PKG::range-v3
             CONAN_PKG::protobuf
         )
+
+qt_add_executable(reactive
+        MANUAL_FINALIZATION
+        reactive.cpp
+        )
+target_link_libraries(reactive
+        PRIVATE
+        CONAN_PKG::rxcpp
+        )
+
 qt_add_executable(cpp20
         MANUAL_FINALIZATION
             cpp20features.cpp
