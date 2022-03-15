@@ -13,6 +13,8 @@ using namespace Rx;
 using namespace std;
 using namespace std::chrono;
 
+// https://github.com/ReactiveX/RxCpp
+
 int main()
 {
 	random_device rd;   // non-deterministic generator
