@@ -54,7 +54,16 @@ target_link_libraries(rangev3
 
 qt_add_executable(random
         MANUAL_FINALIZATION
-        pseudo-random.cpp
+            pseudo-random.cpp
+        )
+
+qt_add_executable(literals
+        MANUAL_FINALIZATION
+            literals.cpp
+        )
+target_link_libraries(literals
+        PRIVATE
+        CONAN_PKG::range-v3
         )
 
 qt_add_qml_module(lab_module

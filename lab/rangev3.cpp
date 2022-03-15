@@ -209,6 +209,7 @@ auto isSorted()
 
 	std::array<int, 6> a{6, 2, 3, 4, 5, 6};
 	cout << "array:    " << ranges::is_sorted(a) << '\n';
+
 }
 
 auto filterAndTransform()
