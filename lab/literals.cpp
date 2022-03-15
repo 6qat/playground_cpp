@@ -66,6 +66,15 @@ auto filterView()
 	for (int i : evens) {
 		cout << i << " ";
 	}
+	cout << "\n";
+	for (int i : rng::filter_view{v, is_even}) {
+		cout << i << " ";
+	}
+	cout << "\n";
+	for (int i :  v | rng::views::filter(is_even)) {
+		cout << i << " ";
+	}
+
 }
 
 auto main() -> int

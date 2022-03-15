@@ -44,6 +44,15 @@ qt_add_executable(ranges
             ranges.cpp
         )
 
+qt_add_executable(smart
+        MANUAL_FINALIZATION
+        smart-pointers.cpp
+        )
+target_link_libraries(smart
+        PRIVATE
+        CONAN_PKG::boost
+        )
+
 qt_add_executable(rangev3
         MANUAL_FINALIZATION
             rangev3.cpp
