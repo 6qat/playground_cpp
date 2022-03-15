@@ -9,8 +9,12 @@
 #include <array>
 #include <deque>
 #include <forward_list>
+#include <set>
+#include <map>
+#include <unordered_set>
 
 using std::cout;
+using std::string;
 
 auto hello()
 {
@@ -140,31 +144,86 @@ auto find()
 	cout << '\n';
 }
 
-auto forEach()
+auto forEachSequence()
 {
 	auto print = [](int i)
 	{ cout << i << ' '; };
 
 	cout << "vector:   ";
-	std::vector<int> v{1, 2, 3, 4, 5, 6};
+	auto v = std::vector<int>{1, 2, 3, 4, 5, 6};
 	ranges::for_each(v, print); // 1 2 3 4 5 6
 
 	cout << "\narray:    ";
-	std::array<int, 6> a{1, 2, 3, 4, 5, 6};
+	auto a = std::array<int, 6>{1, 2, 3, 4, 5, 6};
 	ranges::for_each(a, print);
 
 	cout << "\nlist:     ";
-	std::list<int> ll{1, 2, 3, 4, 5, 6};
+	auto ll = std::list<int>{1, 2, 3, 4, 5, 6};
 	ranges::for_each(ll, print);
 
 	cout << "\nfwd_list: ";
-	std::forward_list<int> fl{1, 2, 3, 4, 5, 6};
+	auto fl = std::forward_list<int>{1, 2, 3, 4, 5, 6};
 	ranges::for_each(fl, print);
 
 	cout << "\ndeque:    ";
-	std::deque<int> d{1, 2, 3, 4, 5, 6};
+	auto d = std::deque<int>{1, 2, 3, 4, 5, 6};
 	ranges::for_each(d, print);
 	cout << '\n';
+}
+
+auto forEachAssociative()
+{
+
+	auto print = [](int i)
+	{ cout << i << ' '; };
+
+	auto printm = [](const std::pair<string, int> &p)
+	{
+		cout << p.first << ":" << p.second << ' ';
+	};
+
+	cout << "set:           ";
+	auto si = std::set<int>{1, 2, 3, 4, 5, 6};
+	ranges::for_each(si, print);
+
+	cout << "\nmap:           ";
+	auto msi = std::map<string, int>{{"one", 1}, {"two", 2}, {"three", 3}};
+	ranges::for_each(msi, printm);
+
+	cout << "\nunordered map: ";
+	std::unordered_map<string, int> umsi{{"one", 1}, {"two", 2}, {"three", 3}};
+	ranges::for_each(umsi, printm);
+
+	cout << "\nunordered set: ";
+	std::unordered_set<int> usi{1, 2, 3, 4, 5, 6};
+	ranges::for_each(usi, print);
+	cout << '\n';
+
+}
+
+auto isSorted()
+{
+	cout << std::boolalpha;
+	std::vector<int> v{1, 2, 3, 4, 5, 6, 6};
+	cout << "vector:   " << ranges::is_sorted(v) << '\n';
+
+	std::array<int, 6> a{6, 2, 3, 4, 5, 6};
+	cout << "array:    " << ranges::is_sorted(a) << '\n';
+}
+
+auto filterAndTransform()
+{
+	std::vector<int> const vi{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+	using namespace ranges;
+
+	auto rng = vi
+		| views::filter([](int i)
+						{ return i % 2 == 0; })
+		|
+			views::transform([](int i)
+							 { return std::to_string(i); });
+	// prints: [2,4,6,8,10]
+	cout << rng << '\n';
 }
 
 auto main() -> int
@@ -174,6 +233,10 @@ auto main() -> int
 	count();
 	count_if();
 	find();
+	forEachSequence();
+	forEachAssociative();
+	isSorted();
+	filterAndTransform();
 
 	exit(0);
 }
