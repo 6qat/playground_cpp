@@ -20,6 +20,7 @@ conan_cmake_run(
             range-v3/0.11.0
             protobuf/3.19.2
             quickfix/1.15.1
+            boost/1.78.0
         BASIC_SETUP CMAKE_TARGETS
         BUILD missing
 )
@@ -64,6 +65,7 @@ qt_add_executable(literals
 target_link_libraries(literals
         PRIVATE
         CONAN_PKG::range-v3
+        CONAN_PKG::boost
         )
 
 qt_add_qml_module(lab_module

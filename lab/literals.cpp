@@ -7,17 +7,18 @@
 #include <array>
 #include <range/v3/all.hpp>
 #include <ranges> // std ranges
+#include <boost/container/flat_map.hpp>
 
 namespace rv3 = ranges::cpp20;
 namespace rng = std::ranges;
-using std::string;
-using std::cout;
+using std::string, std::cout, boost::container::flat_map;
 
 // From STL to Ranges: Using Ranges Effectively - Jeff Garland - CppCon 2019
 // https://www.youtube.com/watch?v=vJ290qlAbbw
 
-auto main() -> int
+auto lab()
 {
+
 	auto num1 = new const int{42};
 	const auto num2{10u};
 
@@ -32,14 +33,45 @@ auto main() -> int
 	auto colors3 = rng::sort(colors1);
 
 	std::sort(colors1.begin(), colors1.end());
-	rng::sort(sa);
+	rv3::sort(sa);
 
 	auto is_six = [](int i) -> bool
 	{ return i == 6; };
-	for (int i : rng::filter_view(colors1, is_six)){
+	for (int i : rng::filter_view(colors1, is_six)) {
 		cout << i << " ";
 	}
 	cout << "\n";
+}
+
+auto flatMapExample()
+{
+	flat_map<string, int> fm;
+	fm["world"] = 2;
+	fm["hello"] = 1;
+
+	for (auto[k, v] : rng::reverse_view{fm}) {
+		cout << k << ":" << v << "\n";
+	}
+}
+
+auto filterView()
+{
+	auto v = std::vector{0, 1, 2, 3, 5, 6, 7, 8, 9};
+	auto is_even = [](int i)
+	{
+		return 0 == i % 2;
+	};
+
+	auto evens = rng::filter_view{v, is_even};
+	for (int i : evens) {
+		cout << i << " ";
+	}
+}
+
+auto main() -> int
+{
+	flatMapExample();
+	filterView();
 
 	exit(0);
 }
