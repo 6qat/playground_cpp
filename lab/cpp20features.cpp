@@ -254,4 +254,7 @@ auto stdToArray()
     auto z = std::to_array(a);
 }
 
+auto main() -> int {
 
+	return 0;
+}

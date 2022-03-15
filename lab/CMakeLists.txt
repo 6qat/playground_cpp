@@ -32,6 +32,10 @@ target_link_libraries(modern PRIVATE
         CONAN_PKG::range-v3
         CONAN_PKG::protobuf
         )
+qt_add_executable(cpp20
+        MANUAL_FINALIZATION
+        cpp20features.cpp
+        )
 
 qt_add_executable(ranges
         MANUAL_FINALIZATION
