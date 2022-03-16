@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(Tapechart_Qt VERSION 0.1 LANGUAGES CXX)
+project(Playground_CPP VERSION 0.1 LANGUAGES CXX)
 
 # -DCMAKE_TOOLCHAIN_FILE=D:/dev/vcpkg/scripts/buildsystems/vcpkg.cmake
 
