@@ -19,13 +19,13 @@
 // https://en.cppreference.com/w/cpp/named_req/MoveConstructible
 // https://en.cppreference.com/w/cpp/language/operators
 
-template<class F, class I>
-concept indirect_unary_predicate =
-std::indirectly_readable<I> &&
-	std::copy_constructible<F> &&
-	std::predicate<F &, std::iter_value_t<I> &> &&
-	std::predicate<F &, std::iter_reference_t<I>> &&
-	std::predicate<F &, std::iter_common_reference_t<I>>;
+//template<class F, class I>
+//concept indirect_unary_predicate =
+//std::indirectly_readable<I> &&
+//	std::copy_constructible<F> &&
+//	std::predicate<F &, std::iter_value_t<I> &> &&
+//	std::predicate<F &, std::iter_reference_t<I>> &&
+//	std::predicate<F &, std::iter_common_reference_t<I>>;
 
 struct fib_generator
 {
@@ -88,7 +88,12 @@ auto fibfun(int n, int k)
 
 }
 
-inline constexpr auto trim_front = std::views::drop_while(std::isspace);
+
+auto is_space = [] (const int t) {
+    return std::isspace(t);
+};
+
+inline constexpr auto trim_front = std::ranges::views::drop_while(is_space);
 
 inline constexpr auto trim_back =
 	std::views::reverse
@@ -99,7 +104,7 @@ inline constexpr auto trim_back =
 inline constexpr auto trim = trim_front | trim_back;
 
 template<std::ranges::view  V, typename Pred> requires std::ranges::bidirectional_range<V> &&
-	indirect_unary_predicate<Pred, std::ranges::iterator_t<V>>
+	std::indirect_unary_predicate<Pred, std::ranges::iterator_t<V>>
 class drop_last_while_view
 	: public std::ranges::view_interface<drop_last_while_view<V, Pred>>
 {
