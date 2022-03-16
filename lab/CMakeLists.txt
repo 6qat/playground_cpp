@@ -26,6 +26,11 @@ conan_cmake_run(
         BUILD missing
 )
 
+qt_add_executable(const
+        MANUAL_FINALIZATION
+        constness.cpp
+        )
+
 qt_add_executable(modern
         MANUAL_FINALIZATION
         modernCpp.cpp
