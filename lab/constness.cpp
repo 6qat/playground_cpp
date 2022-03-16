@@ -38,8 +38,24 @@ public:
     }
 };
 
+MyClass foo() {
+    MyClass ret;
+    return ret;
+}
+
+const MyClass const_foo() {
+    MyClass ret;
+    return ret;
+}
+
 int main() {
     MyClass mc1;
-    auto mc2 = MyClass{};
+
+    mc1 = foo();
+
+    cout << "====" << endl;
+
+//    mc1 = const_foo();
+
     return 0;
 }
