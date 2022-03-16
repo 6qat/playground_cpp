@@ -14,21 +14,26 @@ public:
     MyClass() {
         cout << "Default constructor" << endl;
     }
-    MyClass(const MyClass& other) {
+
+    MyClass(const MyClass &other) {
         cout << "Copy constructor" << endl;
     }
-    MyClass(MyClass && other) noexcept {
+
+    MyClass(MyClass &&other) noexcept {
         cout << "Move constructor" << endl;
     }
-    MyClass& operator=(const MyClass& other) {
+
+    MyClass &operator=(const MyClass &other) {
         cout << "Copy assignment" << endl;
         return *this;
     }
-    MyClass& operator=(MyClass&& other) noexcept {
+
+    MyClass &operator=(MyClass &&other) noexcept {
         cout << "Move assignment" << endl;
         return *this;
     }
-    ~MyClass(){
+
+    ~MyClass() {
         cout << "Destructor" << endl;
     }
 };
