@@ -41,7 +41,7 @@ set(PROJECT_SOURCES
         ServerConnection.h
 )
 
-qt_add_executable(temp_qt
+qt_add_executable(main
     MANUAL_FINALIZATION
     ${PROJECT_SOURCES}
 )
@@ -65,23 +65,23 @@ conan_cmake_run(
         BUILD missing
 )
 
-target_link_libraries(temp_qt PRIVATE
+target_link_libraries(main PRIVATE
         lab_module   #plugin
-        CONAN_PKG::range-v3
+#        CONAN_PKG::range-v3
         CONAN_PKG::protobuf
-        CONAN_PKG::boost
+#        CONAN_PKG::boost
 #        protobuf::libprotobuf
 #        Boost::boost
         )
 
-target_link_libraries(temp_qt PRIVATE
+target_link_libraries(main PRIVATE
         Qt6::Quick
         Qt6::WebSockets
         Qt6::Widgets
         Qt6::QuickControls2
         )
 
-set_target_properties(temp_qt PROPERTIES
+set_target_properties(main PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com
     MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
     MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
@@ -89,5 +89,5 @@ set_target_properties(temp_qt PROPERTIES
 #    WIN32_EXECUTABLE TRUE
 )
 
-qt_finalize_executable(temp_qt)
+qt_finalize_executable(main)
 

@@ -6,13 +6,13 @@
 //#include <boost/chrono.hpp>
 #include <chrono>
 
-#include <range/v3/all.hpp> // get everything
+//#include <range/v3/all.hpp> // get everything
 //#include "argparse/argparse.hpp" // https://github.com/p-ranav/argparse
 //Q_IMPORT_PLUGIN(labPlugin)
 
 auto main(int argc, char *argv[]) -> int
 {
-	int sum = Lab::sum(1, 2);
+	int sum = Lab::sum(10, 2);
 	qDebug() << sum;
 
 	auto a = QApplication(argc, argv);
