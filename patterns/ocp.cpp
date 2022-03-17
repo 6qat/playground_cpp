@@ -32,14 +32,43 @@ struct Product
 	Size size;
 };
 
+template <typename T> struct Specification {
+
+};
+
 struct ProductFilter
 {
-	static auto by_color(const vector<Product *> &items, Color color) -> vector<Product *>
+	static auto by_color(const vector<Product *> &items,
+						 Color color) -> vector<Product *>
 	{
 		auto result = vector<Product *>{};
 
 		for (auto i : items)
 			if (i->color == color)
+				result.push_back(i);
+
+		return result;
+	}
+
+	static auto by_size(const vector<Product *> &items,
+						Size size) -> vector<Product *>
+	{
+		auto result = vector<Product *>{};
+
+		for (auto i : items)
+			if (i->size == size)
+				result.push_back(i);
+
+		return result;
+	}
+
+	static auto by_size_and_color(const vector<Product *> &items,
+								  Size size, Color color) -> vector<Product *>
+	{
+		auto result = vector<Product *>{};
+
+		for (auto i : items)
+			if (i->size == size && i->color == color)
 				result.push_back(i);
 
 		return result;
