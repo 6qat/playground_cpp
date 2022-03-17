@@ -33,6 +33,7 @@ find_package(Qt6 6.2 REQUIRED COMPONENTS Quick WebSockets Widgets QuickControls2
 #find_package(Boost REQUIRED)
 
 add_subdirectory(lab)
+add_subdirectory(patterns)
 
 set(PROJECT_SOURCES
         main.cpp

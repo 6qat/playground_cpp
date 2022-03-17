@@ -5,6 +5,9 @@
 #include <QtQml/qqmlextensionplugin.h>
 //#include <boost/chrono.hpp>
 #include <chrono>
+#include <ctime>
+#include <sstream>
+#include <iomanip>
 
 //#include <range/v3/all.hpp> // get everything
 //#include "argparse/argparse.hpp" // https://github.com/p-ranav/argparse
@@ -34,24 +37,26 @@ auto calendarTimeZoneLibrary() {
     auto date2 = 21d / October / 2018;
     auto date3 = January / 27d / 2019;
 
+    cout << date1 << endl << date2 << endl << date3 << endl;
+
     auto mil = milliseconds(1000);
     mil = mil * 60;
 
-    std::cout << "duration (in periods): ";
-    std::cout << mil.count() << " milliseconds.\n";
-    std::cout << "duration (in seconds): ";
-    std::cout << (mil.count() * milliseconds::period::num / milliseconds::period::den);
-    std::cout << " seconds.\n";
+    cout << "duration (in periods): ";
+    cout << mil.count() << " milliseconds.\n";
+    cout << "duration (in seconds): ";
+    cout << (mil.count() * milliseconds::period::num / milliseconds::period::den);
+    cout << " seconds.\n";
 
     time_point<system_clock> start, end;
     start = system_clock::now();
-    std::cout << "f(42) = " << fibonacci(42) << '\n';
+    cout << "f(42) = " << fibonacci(42) << '\n';
     end = std::chrono::system_clock::now();
 
     duration<double> elapsed_seconds = end - start;
     time_t end_time = system_clock::to_time_t(end);
 
-    std::cout << "finished computation at " << std::ctime(&end_time)
+    cout << "finished computation at " << std::put_time(std::localtime(&end_time), "%c %Z")
               << "elapsed time: " << elapsed_seconds.count() << "s\n";
 
 }
