@@ -27,53 +27,67 @@ public:
 	) : width(width), height(height) {}
 
 	[[nodiscard]]
-	auto getWidth(
-	) const -> int {
+	auto getWidth() const -> int {
 		return width;
 	}
 
 	[[nodiscard]]
-	auto getHeight(
-	) const -> int {
+	auto getHeight() const -> int {
 		return height;
 	}
 
-	auto setWidth(
-		int w
-	) -> void {
+	virtual auto setWidth(int w) -> void {
 		width = w;
 	}
 
-	auto setHeight(
-		int h
-	) -> void {
+	virtual auto setHeight(int h) -> void {
 		height = h;
 	}
 
 	[[nodiscard]]
-	auto area(
-	) const -> int {
+	auto area() const -> int {
 		return width * height;
 	}
 
 };
 
-auto process(
-	Rectangle &r
-) -> void {
+class Square
+	: public Rectangle {
+public:
+
+	explicit Square(int size)
+		: Rectangle{size, size} {}
+
+	auto setWidth(int w) -> void override {
+		this->width = this->height = w;
+	}
+
+	auto setHeight(int h) -> void override {
+		this->width = this->height = h;
+	}
+
+};
+
+auto process(Rectangle &r) -> void {
+
 	int w = r.getWidth();
 	r.setHeight(10);
+	cout << "Expected area = " << (w * 10)
+		 << ", got " << r.area() << endl;
+
 }
 
-auto main(
-) -> int {
+auto main() -> int {
 
 	auto rect = Rectangle{1, 2};
-
 	rect.setHeight(10);
 	rect.setWidth(20);
 	auto h = rect.getHeight();
 	auto w = rect.getWidth();
+	process(rect);
+
+	auto square = Square{5};
+	process(square);
 
 	return 0;
 
