@@ -32,14 +32,12 @@ struct Product
 	Size size;
 };
 
-template <typename T> struct Specification {
-
-};
-
 struct ProductFilter
 {
-	static auto by_color(const vector<Product *> &items,
-						 Color color) -> vector<Product *>
+	static auto by_color(
+		const vector<Product *> &items,
+		Color color
+	) -> vector<Product *>
 	{
 		auto result = vector<Product *>{};
 
@@ -50,8 +48,10 @@ struct ProductFilter
 		return result;
 	}
 
-	static auto by_size(const vector<Product *> &items,
-						Size size) -> vector<Product *>
+	static auto by_size(
+		const vector<Product *> &items,
+		Size size
+	) -> vector<Product *>
 	{
 		auto result = vector<Product *>{};
 
@@ -62,8 +62,10 @@ struct ProductFilter
 		return result;
 	}
 
-	static auto by_size_and_color(const vector<Product *> &items,
-								  Size size, Color color) -> vector<Product *>
+	static auto by_size_and_color(
+		const vector<Product *> &items,
+		Size size, Color color
+	) -> vector<Product *>
 	{
 		auto result = vector<Product *>{};
 
@@ -73,6 +75,43 @@ struct ProductFilter
 
 		return result;
 	}
+};
+
+template<typename T>
+struct Specification
+{
+	virtual auto is_satisfied(
+		T *item
+	) -> bool = 0;
+};
+
+template<typename T>
+struct Filter
+{
+	virtual auto filter(
+		vector<T *> items,
+		Specification<T> &spec
+	) -> vector<T *> = 0;
+};
+
+struct BetterFilter: Filter<Product>
+{
+	auto filter(
+		vector<Product *> items,
+		Specification<Product> &spec
+	) -> vector<Product *> override
+	{
+		auto result = vector<Product *>{};
+		for (auto item : items)
+			if (spec.is_satisfied(item))
+				result.push_back(item);
+		return result;
+	}
+};
+
+struct ColorSpecification: Specification<Product>
+{
+
 };
 
 int main()
