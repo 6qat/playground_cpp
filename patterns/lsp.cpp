@@ -77,6 +77,11 @@ auto process(Rectangle &r) -> void {
 
 }
 
+struct RectangleFactory {
+	static Rectangle create_rectangle(int w, int h){};
+	static Rectangle create_square(int size){};
+};
+
 auto main() -> int {
 
 	auto rect = Rectangle{1, 2};

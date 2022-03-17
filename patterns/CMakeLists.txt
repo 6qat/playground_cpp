@@ -57,3 +57,12 @@ target_link_libraries(lsp
             CONAN_PKG::boost
         )
 
+qt_add_executable(isp
+        MANUAL_FINALIZATION
+        isp.cpp
+        )
+target_link_libraries(isp
+        PRIVATE
+        CONAN_PKG::boost
+        )
+
