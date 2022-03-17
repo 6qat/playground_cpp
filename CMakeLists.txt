@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 3.5)
 project(Playground_CPP VERSION 0.1 LANGUAGES CXX)
 
 # -DCMAKE_TOOLCHAIN_FILE=D:/dev/vcpkg/scripts/buildsystems/vcpkg.cmake
+# -DCMAKE_TOOLCHAIN_FILE=D:\dev\Qt\6.2.3\msvc2019_64\lib\cmake\Qt6\qt.toolchain.cmake
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
