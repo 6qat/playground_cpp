@@ -76,7 +76,7 @@ struct ProductFilter {
 	}
 };
 
-template <typename T>
+template<typename T>
 struct AndSpecification;
 
 template<typename T>
@@ -201,9 +201,9 @@ int main() {
 		cout << p->name << endl;
 
 	auto largeAndBlue = ColorSpecification{Color::blue} && SizeSpecification{Size::large};
-	for(auto p :BetterFilter{}.filter(items, largeAndBlue))
+	for (auto p : BetterFilter{}.filter(items, largeAndBlue))
 		cout << p->name << endl;
 
-
 	return 0;
-	}
+
+}
