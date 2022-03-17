@@ -7,8 +7,6 @@
 #include <string>
 #include <vector>
 #include <iostream>
-#include <fstream>
-#include <boost/lexical_cast.hpp>
 
 using std::string;
 using std::vector;
