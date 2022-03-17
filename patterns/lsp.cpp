@@ -27,14 +27,14 @@ public:
 	) : width(width), height(height) {}
 
 	[[nodiscard]]
-	auto getWidth()
-	const -> int {
+	auto getWidth(
+	) const -> int {
 		return width;
 	}
 
 	[[nodiscard]]
-	auto getHeight()
-	const -> int {
+	auto getHeight(
+	) const -> int {
 		return height;
 	}
 
@@ -51,8 +51,8 @@ public:
 	}
 
 	[[nodiscard]]
-	auto area()
-	const -> int {
+	auto area(
+	) const -> int {
 		return width * height;
 	}
 
@@ -65,8 +65,8 @@ auto process(
 	r.setHeight(10);
 }
 
-auto main()
--> int {
+auto main(
+) -> int {
 
 	auto rect = Rectangle{1, 2};
 
