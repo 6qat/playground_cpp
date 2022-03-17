@@ -76,12 +76,19 @@ struct ProductFilter {
 	}
 };
 
+template <typename T>
+struct AndSpecification;
+
 template<typename T>
 struct Specification {
 
 	virtual auto is_satisfied(
 		T *item
 	) -> bool = 0;
+
+	AndSpecification<T> operator&&(Specification<T> &&other) {
+		return AndSpecification{*this, other};
+	}
 
 };
 
@@ -190,9 +197,13 @@ int main() {
 		cout << p->name << endl;
 
 	auto smallAndGreen = AndSpecification{small, green};
-	for (auto p: BetterFilter{}.filter(items, smallAndGreen))
+	for (auto p : BetterFilter{}.filter(items, smallAndGreen))
+		cout << p->name << endl;
+
+	auto largeAndBlue = ColorSpecification{Color::blue} && SizeSpecification{Size::large};
+	for(auto p :BetterFilter{}.filter(items, largeAndBlue))
 		cout << p->name << endl;
 
 
 	return 0;
-}
+	}
