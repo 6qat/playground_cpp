@@ -88,9 +88,9 @@ auto fibfun(int n, int k)
 
 }
 
-
-auto is_space = [] (const int t) {
-    return std::isspace(t);
+auto constexpr is_space = [](const int t)
+{
+	return std::isspace(t);
 };
 
 inline constexpr auto trim_front = std::ranges::views::drop_while(is_space);

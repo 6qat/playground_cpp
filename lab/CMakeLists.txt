@@ -97,7 +97,7 @@ qt_add_qml_module(lab_module
         URI "lab"
         VERSION 1.0
         QML_FILES
-        Other.qml
+#        Other.qml
         SOURCES
         Lab.cpp Lab.h
 
