@@ -16,29 +16,26 @@ using std::cout;
 using std::endl;
 using std::ofstream;
 
-enum class Color
-{
+enum class Color {
 	red, green, blue
 };
-enum class Size
-{
+enum class Size {
 	small, medium, large
 };
 
-struct Product
-{
+struct Product {
 	string name;
 	Color color;
 	Size size;
 };
 
-struct ProductFilter
-{
+struct ProductFilter {
+
 	static auto by_color(
 		const vector<Product *> &items,
 		Color color
-	) -> vector<Product *>
-	{
+	) -> vector<Product *> {
+
 		auto result = vector<Product *>{};
 
 		for (auto i : items)
@@ -51,8 +48,8 @@ struct ProductFilter
 	static auto by_size(
 		const vector<Product *> &items,
 		Size size
-	) -> vector<Product *>
-	{
+	) -> vector<Product *> {
+
 		auto result = vector<Product *>{};
 
 		for (auto i : items)
@@ -60,13 +57,14 @@ struct ProductFilter
 				result.push_back(i);
 
 		return result;
+
 	}
 
 	static auto by_size_and_color(
 		const vector<Product *> &items,
 		Size size, Color color
-	) -> vector<Product *>
-	{
+	) -> vector<Product *> {
+
 		auto result = vector<Product *>{};
 
 		for (auto i : items)
@@ -74,56 +72,127 @@ struct ProductFilter
 				result.push_back(i);
 
 		return result;
+
 	}
 };
 
 template<typename T>
-struct Specification
-{
+struct Specification {
+
 	virtual auto is_satisfied(
 		T *item
 	) -> bool = 0;
+
 };
 
 template<typename T>
-struct Filter
-{
+struct Filter {
+
 	virtual auto filter(
 		vector<T *> items,
 		Specification<T> &spec
 	) -> vector<T *> = 0;
+
 };
 
-struct BetterFilter: Filter<Product>
-{
+struct BetterFilter
+	: Filter<Product> {
+
 	auto filter(
 		vector<Product *> items,
 		Specification<Product> &spec
-	) -> vector<Product *> override
-	{
+	) -> vector<Product *> override {
+
 		auto result = vector<Product *>{};
+
 		for (auto item : items)
 			if (spec.is_satisfied(item))
 				result.push_back(item);
+
 		return result;
 	}
-};
-
-struct ColorSpecification: Specification<Product>
-{
 
 };
 
-int main()
-{
+struct ColorSpecification
+	: Specification<Product> {
+
+	Color color;
+
+	explicit ColorSpecification(
+		Color color
+	) : color(color) {}
+
+	auto is_satisfied(
+		Product *item
+	) -> bool override {
+		return item->color == color;
+	}
+
+};
+
+struct SizeSpecification
+	: Specification<Product> {
+
+	Size size;
+
+	explicit SizeSpecification(
+		Size size
+	) : size(size) {}
+
+	auto is_satisfied(
+		Product *item
+	) -> bool override {
+		return item->size == size;
+	}
+
+};
+
+template<typename T>
+struct AndSpecification
+	: Specification<T> {
+
+	Specification<T> &first;
+	Specification<T> &second;
+
+	AndSpecification(
+		Specification<T> &first,
+		Specification<T> &second
+	) : first(first), second(second) {}
+
+	auto is_satisfied(
+		T *item
+	) -> bool override {
+		return first.is_satisfied(item) && second.is_satisfied(item);
+	}
+
+};
+
+int main() {
+
 	auto apple = Product{"Apple", Color::green, Size::small};
 	auto tree = Product{"Tree", Color::green, Size::large};
 	auto house = Product{"Hose", Color::blue, Size::large};
 
 	auto items = vector<Product *>{&apple, &tree, &house};
 
+	// Old way (using BetterFilter)
 	for (auto p : ProductFilter::by_color(items, Color::green))
 		cout << p->name << endl;
+
+	// OCP Way
+	auto green = ColorSpecification{Color::green};
+	for (auto p : BetterFilter{}.filter(items, green))
+		cout << p->name << endl;
+
+	auto small = SizeSpecification{Size::small};
+	for (auto p : BetterFilter{}.filter(items, small))
+		cout << p->name << endl;
+
+	auto smallAndGreen = AndSpecification{small, green};
+	for (auto p: BetterFilter{}.filter(items, smallAndGreen))
+		cout << p->name << endl;
+
 
 	return 0;
 }
