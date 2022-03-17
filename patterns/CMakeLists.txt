@@ -32,18 +32,28 @@ target_link_libraries(patterns
 
 qt_add_executable(srp
         MANUAL_FINALIZATION
-        srp.cpp
+            srp.cpp
         )
 target_link_libraries(srp
         PRIVATE
-        CONAN_PKG::boost
+            CONAN_PKG::boost
         )
 
 qt_add_executable(ocp
         MANUAL_FINALIZATION
-        ocp.cpp
+            ocp.cpp
         )
 target_link_libraries(ocp
         PRIVATE
-        CONAN_PKG::boost
+            CONAN_PKG::boost
         )
+
+qt_add_executable(lsp
+        MANUAL_FINALIZATION
+            lsp.cpp
+        )
+target_link_libraries(lsp
+        PRIVATE
+            CONAN_PKG::boost
+        )
+
