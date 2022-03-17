@@ -22,7 +22,7 @@ struct Journal
 	string title{};
 	vector<string> entries{};
 
-	Journal(const string &title)
+	explicit Journal(const string &title)
 		: title(title)
 	{}
 

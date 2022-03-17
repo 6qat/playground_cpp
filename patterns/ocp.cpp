@@ -86,7 +86,9 @@ struct Specification {
 		T *item
 	) -> bool = 0;
 
-	AndSpecification<T> operator&&(Specification<T> &&other) {
+	auto operator&&(
+		Specification<T> &&other
+	) -> AndSpecification<T> {
 		return AndSpecification{*this, other};
 	}
 
