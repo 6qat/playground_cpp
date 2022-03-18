@@ -19,6 +19,7 @@ int main() {
 	cout << "ocp.cpp : Open-Closed Principle" << endl;
 	cout << "lsp.cpp : Liskov Substitution Principle" << endl;
 	cout << "isp.cpp : Interface Segregation Principle" << endl;
+	cout << "dip.cpp : Dependence Inversion Principle" << endl;
 
 	return 0;
 }
