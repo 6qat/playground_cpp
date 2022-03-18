@@ -51,7 +51,9 @@ struct Research { // high-level
 	explicit Research(RelationShips &relationShips) {
 		auto &relations = relationShips.relations;
 		for (auto &&[first, rel, second] : relations) {
-
+			if (first.name == "John" && rel == RelationShip::parent) {
+				cout << "John has a child called " << second.name << endl;
+			}
 		}
 	}
 };
@@ -64,6 +66,7 @@ int main() {
 	relationShips.add_parent_and_child(parent, child1);
 	relationShips.add_parent_and_child(parent, child2);
 
+	Research _(relationShips);
 
 	return 0;
 }
