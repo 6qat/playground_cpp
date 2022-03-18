@@ -39,23 +39,47 @@ struct Person {
 	string name;
 };
 
-struct RelationShips { // low-level
+struct RelationShipBrowser {
+	virtual vector<Person> find_all_children_of(const string &name) = 0;
+};
+
+struct RelationShips: RelationShipBrowser { // low-level
+
 	vector<tuple<Person, RelationShip, Person>> relations;
+
 	void add_parent_and_child(const Person &parent, const Person &child) {
 		relations.emplace_back(parent, RelationShip::parent, child);
 		relations.emplace_back(child, RelationShip::child, parent);
 	}
+	vector<Person> find_all_children_of(const string &name) override {
+
+		vector<Person> result;
+		for (auto &&[first, rel, second] : relations) {
+			if (first.name == name && rel == RelationShip::parent) {
+				result.push_back(second);
+			}
+		}
+		return result;
+	}
 };
 
 struct Research { // high-level
-	explicit Research(RelationShips &relationShips) {
-		auto &relations = relationShips.relations;
-		for (auto &&[first, rel, second] : relations) {
-			if (first.name == "John" && rel == RelationShip::parent) {
-				cout << "John has a child called " << second.name << endl;
-			}
+
+	explicit Research(RelationShipBrowser &browser) {
+		for(auto &child : browser.find_all_children_of("John")) {
+			cout << "John has a child called " << child.name << endl;
 		}
 	}
+
+//	explicit Research(RelationShips &relationShips) {
+//		auto &relations = relationShips.relations; // depends on implementation details!!! XXX
+//		for (auto &&[first, rel, second] : relations) {
+//			if (first.name == "John" && rel == RelationShip::parent) {
+//				cout << "John has a child called " << second.name << endl;
+//			}
+//		}
+//	}
+
 };
 
 int main() {
