@@ -16,7 +16,7 @@ using std::endl;
 int main() {
 
 	cout << "srp.cpp : Single Responsibility Principle" << endl;
-	cout << "ocp.cpp : OpenClosed Principle" << endl;
+	cout << "ocp.cpp : Open-Closed Principle" << endl;
 	cout << "lsp.cpp : Liskov Substitution Principle" << endl;
 	cout << "isp.cpp : Interface Segregation Principle" << endl;
 
