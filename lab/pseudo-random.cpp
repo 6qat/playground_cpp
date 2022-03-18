@@ -22,7 +22,7 @@ int main()
 	std::cout << "Randomly-chosen mean: " << mean << '\n';
 
 	// Generate a normal distribution around that mean
-	std::seed_seq seed2{r(), r(), r(), r(), r(), r(), r(), r()};
+	std::seed_seq seed2{ r(), r(), r(), r(), r(), r(), r(), r() };
 	std::mt19937 e2(seed2);
 	std::normal_distribution<> normal_dist(mean, 2);
 
@@ -33,7 +33,7 @@ int main()
 	std::cout << "Normal distribution around " << mean << ":\n";
 	for (auto p : hist) {
 		std::cout << std::fixed << std::setprecision(1) << std::setw(2)
-				  << p.first << ' ' << std::string(p.second/200, '*') << '\n';
+			<< p.first << ' ' << std::string(p.second / 200, '*') << '\n';
 	}
 
 	exit(0);
