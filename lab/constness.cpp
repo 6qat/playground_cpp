@@ -10,52 +10,67 @@ using std::cout;
 using std::endl;
 
 class MyClass {
+private:
+
+	int id_;
+	int old_id_{};
+
 public:
-    MyClass() {
-        cout << "Default constructor" << endl;
-    }
 
-    MyClass(const MyClass &other) {
-        cout << "Copy constructor" << endl;
-    }
+	MyClass() = delete;
 
-    MyClass(MyClass &&other) noexcept {
-        cout << "Move constructor" << endl;
-    }
+	explicit MyClass(int i) : id_{i} {
+		cout << "Current id: " << i << ", old id: " << old_id_ << " << Constructor >>" << endl;
+	}
 
-    MyClass &operator=(const MyClass &other) {
-        cout << "Copy assignment" << endl;
-        return *this;
-    }
+	MyClass(const MyClass &other) {
+		old_id_ = id_;
+		id_ = other.id_;
+		cout << "Current id: " << id_ << ", old id: " << old_id_ << " << COPY constructor >>" << endl;
+	}
 
-    MyClass &operator=(MyClass &&other) noexcept {
-        cout << "Move assignment" << endl;
-        return *this;
-    }
+	MyClass(MyClass &&other) noexcept {
+		old_id_ = id_;
+		id_ = other.id_;
+		cout << "Current id: " << id_ << ", old id: " << old_id_ << " << MOVE constructor >>" << endl;
+	}
 
-    ~MyClass() {
-        cout << "Destructor" << endl;
-    }
+	MyClass &operator=(const MyClass &other) {
+		old_id_ = id_;
+		id_ = other.id_;
+		cout << "Current id: " << id_ << ", old id: " << old_id_ << " << COPY assignment >>" << endl;
+		return *this;
+	}
+
+	MyClass &operator=(MyClass &&other) noexcept {
+		old_id_ = id_;
+		id_ = other.id_;
+		cout << "Current id: " << id_ << ", old id: " << old_id_ << " << MOVE assignment >>" << endl;
+		return *this;
+	}
+
+	~MyClass() {
+		cout << "Current id: " << id_ << ", old id: " << old_id_ << " >> Destructor <<" << endl;
+	}
 };
 
-MyClass foo() {
-    MyClass ret;
-    return ret;
+MyClass foo(int i) {
+	MyClass ret(i);
+	return ret;
 }
 
-const MyClass const_foo() {
-    MyClass ret;
-    return ret;
+const MyClass const_foo(int i) {
+	MyClass ret(i);
+	return ret;
 }
 
 int main() {
-    MyClass mc1;
+	MyClass mc1(1);
+	mc1 = foo(2);
 
-    mc1 = foo();
-
-    cout << "====" << endl;
-
+//	mc1 = foo(2);
+//	cout << "====" << endl;
 //    mc1 = const_foo();
 
-    return 0;
+	return 0;
 }
