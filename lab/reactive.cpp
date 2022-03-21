@@ -1,4 +1,4 @@
-#include "rxcpp/rx.hpp"
+#include <rxcpp/rx.hpp>
 namespace Rx
 {
 using namespace rxcpp;
@@ -15,8 +15,7 @@ using namespace std::chrono;
 
 // https://github.com/ReactiveX/RxCpp
 
-int main()
-{
+int main() {
 	std::random_device rd;   // non-deterministic generator
 	std::mt19937 gen(rd());
 	std::uniform_int_distribution<> dist(4, 18);

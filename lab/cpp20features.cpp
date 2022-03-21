@@ -244,7 +244,8 @@ auto arrayBoundedUnbounded()
 
 auto stdToArray()
 {
-    auto x = std::to_array("Geeks");
+    auto x_local = std::to_array("Geeks");
+	std::cout << x_local.size();
 
     auto y = std::to_array<int>({1, 2, 3, 4});
 

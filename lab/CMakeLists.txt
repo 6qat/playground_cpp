@@ -93,6 +93,11 @@ target_link_libraries(literals
         CONAN_PKG::boost
         )
 
+qt_add_executable(stringview
+        MANUAL_FINALIZATION
+        string_view.cpp
+        )
+
 qt_add_qml_module(lab_module
         URI "lab"
         VERSION 1.0
