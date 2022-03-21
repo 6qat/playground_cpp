@@ -9,6 +9,11 @@
 using std::cout;
 using std::endl;
 
+auto id() -> int {
+	static int id = 1;
+	return id++;
+}
+
 class MyClass {
 private:
 
@@ -17,40 +22,60 @@ private:
 
 public:
 
-	MyClass() = delete;
+	auto use() -> void {
+
+	}
+
+	auto operator&&(MyClass &&other) -> MyClass {
+		return MyClass{0};
+	}
+
+	friend std::ostream &operator<<(std::ostream &os, const MyClass &self) {
+		os
+			<< "Current id: " << self.id_
+			<< ", old id: " << self.old_id_;
+
+		return os;
+	}
+
+	//MyClass() = delete;
 
 	explicit MyClass(int i) : id_{i} {
-		cout << "Current id: " << i << ", old id: " << old_id_ << " << Constructor >>" << endl;
+		cout << *this << " << Constructor >>" << endl;
 	}
 
 	MyClass(const MyClass &other) {
 		old_id_ = id_;
 		id_ = other.id_;
-		cout << "Current id: " << id_ << ", old id: " << old_id_ << " << COPY constructor >>" << endl;
+		cout << *this << " << COPY Constructor >>" << endl;
 	}
 
 	MyClass(MyClass &&other) noexcept {
 		old_id_ = id_;
 		id_ = other.id_;
-		cout << "Current id: " << id_ << ", old id: " << old_id_ << " << MOVE constructor >>" << endl;
+		other.id_ = 0;
+		other.old_id_ = 0;
+		cout << *this << " << MOVE Constructor >>" << endl;
 	}
 
 	MyClass &operator=(const MyClass &other) {
 		old_id_ = id_;
 		id_ = other.id_;
-		cout << "Current id: " << id_ << ", old id: " << old_id_ << " << COPY assignment >>" << endl;
+		cout << *this << " << COPY Assignment >>" << endl;
 		return *this;
 	}
 
 	MyClass &operator=(MyClass &&other) noexcept {
 		old_id_ = id_;
 		id_ = other.id_;
-		cout << "Current id: " << id_ << ", old id: " << old_id_ << " << MOVE assignment >>" << endl;
+		other.id_ = 0;
+		other.old_id_ = 0;
+		cout << *this << " << MOVE Assignment >>" << endl;
 		return *this;
 	}
 
 	~MyClass() {
-		cout << "Current id: " << id_ << ", old id: " << old_id_ << " >> Destructor <<" << endl;
+		cout << *this << " ## Destructor ##" << endl;
 	}
 };
 
@@ -65,9 +90,10 @@ const MyClass const_foo(int i) {
 }
 
 int main() {
-	MyClass mc1(1);
-	mc1 = foo(2);
+	MyClass mc1(id());
+	mc1 = foo(id());
+	mc1.use();
 
-
+	auto mc2 = MyClass{id()};
 	return 0;
 }
