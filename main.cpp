@@ -9,6 +9,8 @@
 #include <sstream>
 #include <iomanip>
 
+#include "toml.hpp"
+
 //#include <range/v3/all.hpp> // get everything
 //#include "argparse/argparse.hpp" // https://github.com/p-ranav/argparse
 //Q_IMPORT_PLUGIN(labPlugin)

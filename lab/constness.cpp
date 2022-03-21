@@ -68,9 +68,6 @@ int main() {
 	MyClass mc1(1);
 	mc1 = foo(2);
 
-//	mc1 = foo(2);
-//	cout << "====" << endl;
-//    mc1 = const_foo();
 
 	return 0;
 }

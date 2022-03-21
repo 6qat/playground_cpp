@@ -61,15 +61,24 @@ conan_cmake_run(
         range-v3/0.11.0
         protobuf/3.19.2
         boost/1.78.0
+        tomlplusplus/2.5.0
 #        argparse/2.2
         BASIC_SETUP CMAKE_TARGETS
         BUILD missing
 )
 
+if( NOT EXISTS "${PROJECT_SOURCE_DIR}/toml.hpp")
+    file(
+            DOWNLOAD
+            "https://raw.githubusercontent.com/marzer/tomlplusplus/v3.0.1/toml.hpp"
+            "${PROJECT_SOURCE_DIR}/toml.hpp")
+endif()
+
 target_link_libraries(main PRIVATE
         lab_module   #plugin
 #        CONAN_PKG::range-v3
         CONAN_PKG::protobuf
+#        CONAN_PKG:tomlplusplus
 #        CONAN_PKG::boost
 #        protobuf::libprotobuf
 #        Boost::boost
