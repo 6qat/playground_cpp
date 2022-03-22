@@ -33,6 +33,7 @@ find_package(Qt6 6.2 REQUIRED COMPONENTS Quick WebSockets Widgets QuickControls2
 
 add_subdirectory(lab)
 add_subdirectory(patterns)
+add_subdirectory(Mastering-the-Cpp17-STL-master)
 
 set(PROJECT_SOURCES
         main.cpp
