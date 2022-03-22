@@ -14,15 +14,39 @@
 //#include "argparse/argparse.hpp" // https://github.com/p-ranav/argparse
 //Q_IMPORT_PLUGIN(labPlugin)
 
-auto main(int argc, char *argv[]) -> int {
-	int sum = Lab::sum(10, 2);
-	qDebug() << sum;
+auto createApplication(int &argc, char *argv[])
+-> std::variant<std::unique_ptr<QCoreApplication>, std::unique_ptr<QApplication>> {
 
-	auto a = QApplication(argc, argv);
-	auto w = MainWindow();
-	w.resize(800, 600);
-	w.show();
-	return QApplication::exec();
+	for (int i = 1; i < argc; ++i) {
+		if (!qstrcmp(argv[i], "-no-gui"))
+			//return new QCoreApplication(argc, argv);
+			return std::make_unique<QCoreApplication>(argc, argv);
+	}
+
+
+	return std::make_unique<QApplication>(argc, argv);
+
+}
+
+auto main(int argc, char *argv[]) -> int {
+
+	auto app = createApplication(argc, argv);
+
+	if (std::get<std::unique_ptr<QApplication>>(app)) {
+
+		auto w = new MainWindow();
+		w->resize(800, 600);
+		w->show();
+		return std::get<std::unique_ptr<QApplication>>(app)->exec();
+
+	}
+	else {
+
+		std::cout << "No GUI" << std::endl;
+		return std::get<std::unique_ptr<QCoreApplication>>(app)->exec();
+
+	}
+
 }
 
 auto fibonacci(unsigned n) -> long {
@@ -31,6 +55,7 @@ auto fibonacci(unsigned n) -> long {
 }
 
 auto calendarTimeZoneLibrary() {
+
 	using namespace std::chrono;
 	using namespace std;
 
