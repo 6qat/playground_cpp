@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <forward_list>
 #include <boost/iterator/iterator_facade.hpp>
 #include <cassert>
 #include <cstdio>

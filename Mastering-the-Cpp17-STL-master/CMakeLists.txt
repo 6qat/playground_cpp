@@ -34,4 +34,5 @@ add_executable(chapter11 Chapter11/examples-ch11.cc)
 add_executable(chapter12 Chapter12/examples-ch12.cc)
 
 target_link_libraries(chapter02 PRIVATE CONAN_PKG::boost)
+target_link_libraries(chapter03 PRIVATE CONAN_PKG::boost)
 target_link_libraries(chapter12 PRIVATE CONAN_PKG::boost)
