@@ -224,10 +224,10 @@ struct helloworld {
 };
 
 void test() {
-    std::vector<int, helloworld<int>> v;
-    v.push_back(42);  // prints "hello world 1"
-    v.push_back(42);  // prints "hello world 2"
-    v.push_back(42);  // prints "hello world 4"
+//    std::vector<int, helloworld<int>> v;
+//    v.push_back(42);  // prints "hello world 1"
+//    v.push_back(42);  // prints "hello world 2"
+//    v.push_back(42);  // prints "hello world 4"
 }
 //dex11
 } // namespace ex11
@@ -247,8 +247,8 @@ struct helloworld {
 };
 //ex12
 void test() {
-    std::list<int, helloworld<int>> v;
-    v.push_back(42);
+//    std::list<int, helloworld<int>> v;
+//    v.push_back(42);
 }
 //dex12
 } // namespace ex12
@@ -349,7 +349,7 @@ public:
     operator bool() const { return m_ptr; }
     auto operator-(ChunkyPtr<T> p) const { return m_ptr - p.m_ptr; }
     template<class U> auto operator-(U i) const { return ChunkyPtr(m_ptr-i, m_chunk); }
-    auto operator+(size_t i) const { return ChunkyPtr(m_ptr+i, m_chunk); }
+//    auto operator+(size_t i) const { return ChunkyPtr(m_ptr+i, m_chunk); }
     auto operator<(ChunkyPtr<T> p) const { return m_ptr < p.m_ptr; }
     explicit operator T *() const {
         return m_ptr;
@@ -465,8 +465,8 @@ void test() {
 
 //ex18
     ChunkyMemoryResource mr;
-    std::vector<int, ChunkyAllocator<int>> v{&mr};
-    v.push_back(42);
+//    std::vector<int, ChunkyAllocator<int>> v{&mr};
+//    v.push_back(42);
         // All the memory for v's underlying array
         // is coming from blocks owned by "mr".
 //dex18
@@ -582,11 +582,11 @@ struct WidgetAlloc {
 class Widget {
     char buffer[10000];
     std::pmr::monotonic_buffer_resource mr {buffer, sizeof buffer};
-    std::vector<int, WidgetAlloc<int>> v {&mr};
+//    std::vector<int, WidgetAlloc<int>> v {&mr};
     std::list<int, WidgetAlloc<int>> lst {&mr};
 public:
     static void swap_elems(Widget& a, Widget& b) {
-        std::swap(a.v, b.v);
+//        std::swap(a.v, b.v);
     }
 };
 //dex21
@@ -1013,7 +1013,8 @@ private:
         return (char*)m_buffer + (m_size - bytes);
     }
     void do_deallocate(void *, size_t, size_t) override {}
-    bool do_is_equal(const memory_resource& rhs) const noexcept override {
+    [[nodiscard]]
+	bool do_is_equal(const memory_resource& rhs) const noexcept override {
         return (this == &rhs);
     }
 };
