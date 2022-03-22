@@ -13,14 +13,17 @@
 #include <thread>
 #include <clocale>
 #include <fcntl.h>
-#include <unistd.h>
+//#include <unistd>
+#include <cstdio>
+#include <format>
 
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wimplicit-fallthrough"
-#include <boost/format.hpp>
+//#include <boost/format.hpp>
+#include <format>
 #pragma GCC diagnostic pop
 
-#if 0
+#if 10
  #include <charconv>
 #else
  #include <system_error>
@@ -62,6 +65,7 @@ namespace ex1 {
 int main()
 {
     puts("hello world");
+	return 0;
 }
 //dex1
 #pragma GCC diagnostic pop
@@ -76,6 +80,7 @@ namespace ex2 {
 int main()
 {
     std::cout << "hello world" << std::endl;
+	return 0;
 }
 //dex2
 #pragma GCC diagnostic pop
@@ -87,27 +92,26 @@ namespace ex3 {
 //ex3
 #include <cassert>
 #include <string>
-#include <unistd.h>
+//#include <unistd.h>
 #include <fcntl.h>
-
-int main()
-{
-    int fdw = open("myfile.txt", O_WRONLY | O_CREAT | O_TRUNC);
-    int fdr = open("myfile.txt", O_RDONLY);
-    if (fdw == -1 || fdr == -1)
-        return EXIT_FAILURE;
-
-    write(fdw, "hello world", 11);
-    lseek(fdw, 6, SEEK_SET);
-    write(fdw, "neighbor", 8);
-
-    std::string buffer(14, '\0');
-    int b = read(fdr, buffer.data(), 14);
-    assert(b == 14);
-    assert(buffer == "hello neighbor");
-    close(fdr);
-    close(fdw);
-}
+//int main()
+//{
+//    int fdw = open("myfile.txt", O_WRONLY | O_CREAT | O_TRUNC);
+//    int fdr = open("myfile.txt", O_RDONLY);
+//    if (fdw == -1 || fdr == -1)
+//        return EXIT_FAILURE;
+//
+//    write(fdw, "hello world", 11);
+//    lseek(fdw, 6, SEEK_SET);
+//    write(fdw, "neighbor", 8);
+//
+//    std::string buffer(14, '\0');
+//    int b = read(fdr, buffer.data(), 14);
+//    assert(b == 14);
+//    assert(buffer == "hello neighbor");
+//    close(fdr);
+//    close(fdw);
+//}
 //dex3
 #pragma GCC diagnostic pop
 } // namespace ex3
@@ -152,7 +156,8 @@ namespace ex6 {
 long ftell(FILE *fp)
 {
     int fd = fileno(fp);
-    return lseek(fd, 0, SEEK_CUR);
+    //return lseek(fd, 0, SEEK_CUR);
+	return 0;
 }
 //dex6
 } // namespace ex6
@@ -185,6 +190,7 @@ int main(int argc, const char **argv)
     FILE *fp = (argc < 2) ? stdin : fopen(argv[1], "r");
     auto [lines, words, chars] = word_count(fp);
     printf("%8d %7d %7d\n", lines, words, chars);
+	return 0;
 }
 //dex7
 #pragma GCC diagnostic pop
@@ -205,14 +211,14 @@ void test() {
         // and writes 10 more bytes into the buffer.
 
     assert(bytes_written == 160);
-    assert(lseek(fd, 0, SEEK_CUR) == 150);
+//    assert(lseek(fd, 0, SEEK_CUR) == 150);
     assert(ftell(fp) == 160);
 //dex8
 //ex9
         // Flush the FILE's buffer by force.
     fflush(fp);
         // Now, fd and fp agree about the state of the file.
-    assert(lseek(fd, 0, SEEK_CUR) == 160);
+//    assert(lseek(fd, 0, SEEK_CUR) == 160);
 //dex9
 }
 } // namespace ex8
@@ -276,8 +282,8 @@ void test()
 } // namespace ex13
 
 namespace ex14 {
-std::string better_format(const char *fmt, ...)
-        __attribute((format(printf, 1, 2)));
+//std::string better_format(const char *fmt, ...)
+//        __attribute((format(printf, 1, 2)));
 //ex14
 std::string better_format(const char *fmt, ...)
 {
@@ -449,7 +455,7 @@ std::ostream& flush(std::ostream& os) {
 }
 
 std::ostream& endl(std::ostream& os) {
-    return os << '\n' << flush;
+    return os << '\n'; // << std::flush;
 }
 //dex48
 
@@ -585,7 +591,7 @@ void test() {
     int tuners = 225;
     const char *where = "Chicago";
 //ex32
-    std::cout << boost::format("There are %d piano tuners in %s.") % tuners % where << std::endl;
+    //std::cout << std::format("There are %d piano tuners in %s.") % tuners % where << std::endl;
 //dex32
 }
 } // namespace ex29
@@ -884,6 +890,7 @@ int main()
     for (auto word : streamer<std::string>(std::cin)) {
         process(word);
     }
+	return 0;
 }
 //dex46
 #pragma GCC diagnostic pop
@@ -905,7 +912,7 @@ int main()
     fclose(fp);
     ex1::main();
     ex2::main();
-    ex3::main();
+    //ex3::main();
     ex4::test();
     ex4::test2();
     const char *argv[] = { "", "myfile.txt" };
