@@ -439,6 +439,8 @@ void suougibma(Widget *p);
 } // namespace ex22
 
 namespace ex23 {
+
+using ex1::Widget;
 //ex23
 template<typename T>
 class observer_ptr {
