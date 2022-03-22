@@ -655,7 +655,7 @@ void test()
     assert(std::any_cast<Animal>(&a) == nullptr);
 
     // Asking for void* certainly will not work!
-    assert(std::any_cast<void>(&a) == nullptr);
+    //assert(std::any_cast<void>(&a) == nullptr);
 }
 //dex34
 } // namespace ex34
