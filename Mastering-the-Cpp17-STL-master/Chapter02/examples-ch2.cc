@@ -3,6 +3,9 @@
 #include <iterator>
 #include <vector>
 #include <cstddef>
+#include <stdexcept>
+#include <algorithm>
+//#include <iterator>
 #include <boost/iterator/iterator_facade.hpp>
 
 namespace ex1 {
