@@ -8,6 +8,7 @@
 #include <random>
 #include <string>
 #include <vector>
+#include <numeric>
 
 namespace ex1 {
 //ex1
@@ -183,8 +184,7 @@ void test() {
     assert(g2() == 0x1bb5c'e9ef6); // Paste and serve!
 //dex11
 //ex12
-    using coinflipper = std::independent_bits_engine<
-        std::mt19937, 1, uint8_t>;
+    using coinflipper = std::independent_bits_engine<std::mt19937, 1, unsigned >;
 
     coinflipper onecoin;
     std::array<int, 64> results;
