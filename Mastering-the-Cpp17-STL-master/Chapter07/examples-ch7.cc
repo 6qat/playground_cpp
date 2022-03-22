@@ -18,6 +18,8 @@
 #define BOOST_ASIO_DISABLE_HANDLER_TYPE_REQUIREMENTS
 #include <boost/asio.hpp>
 #include <boost/thread.hpp>
+#include <thread>
+#include <future>
 
 namespace ex1 {
 volatile int& memory_mapped_register_x() { static int x = 0; return x; }
@@ -1067,7 +1069,9 @@ public:
         std::future<ResultType> future = pt.get_future();
 
         UniqueFunction task(
-            [pt = std::move(pt)]() mutable { pt(); }
+			// std::move(pt)
+            //[pt = std::move(pt)]() mutable { if(pt.valid()) pt(); }
+			[]() {}
         );
 
         enqueue_task(std::move(task));
