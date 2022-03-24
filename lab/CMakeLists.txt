@@ -26,6 +26,16 @@ conan_cmake_run(
         BUILD missing
 )
 
+find_package(Qt6 6.2 REQUIRED COMPONENTS Widgets Core)
+
+qt_add_executable(mylabclass
+        MANUAL_FINALIZATION
+        mylabclass.cpp mylabclass.h
+        )
+target_link_libraries(mylabclass PRIVATE
+            Qt6::Widgets Qt6::Core
+            )
+
 qt_add_executable(const
         MANUAL_FINALIZATION
         constness.cpp

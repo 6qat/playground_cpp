@@ -34,8 +34,8 @@ auto MainWindow::createMenus() -> void
     fileMenu->addAction(quitAct);
 
     // #define qApp (static_cast<QApplication *>(QCoreApplication::instance()))
-    auto app = (dynamic_cast<QApplication *>(QCoreApplication::instance()));
-    auto aboutQtAct = helpMenu->addAction(tr("About &Qt"), app, &QApplication::aboutQt);
+    // auto app = (dynamic_cast<QApplication *>(QCoreApplication::instance()));
+    auto aboutQtAct = helpMenu->addAction(tr("About &Qt"),  &QApplication::aboutQt);
 
     aboutQtAct->setStatusTip(tr("Show the Qt library's About box"));
 }
@@ -70,7 +70,7 @@ auto MainWindow::closeEvent(QCloseEvent *event) -> void
 auto MainWindow::contextMenuEvent(QContextMenuEvent *event) -> void
 {
     qDebug() << "<< ContextMenuEvent >>";
-    auto *menu = new QMenu(this);
+    auto menu = new QMenu(this);
     menu->addAction(tr("Action 1"));
     menu->addAction(tr("Action 2"));
     menu->popup(mapToGlobal(event->pos()));
@@ -103,10 +103,14 @@ auto MainWindow::keyPressEvent(QKeyEvent *event) -> void
 auto MainWindow::resizeEvent(QResizeEvent *event) -> void
 {
     qDebug() << "<< ResizeEvent >> Old size: " << event->oldSize() << " New size: " << event->size();
+	event->accept();
+//	QMainWindow::resizeEvent(event);
 }
 auto MainWindow::paintEvent(QPaintEvent *event) -> void
 {
     qDebug() << "<< PaintEvent >> triggered";
+	event->accept();
+//	QMainWindow::paintEvent(event);
 }
 auto MainWindow::createStatusBar() -> void
 {
